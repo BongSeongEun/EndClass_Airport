@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <h2> 내가 서윤 </h2>
+
 </body>
 </html>
