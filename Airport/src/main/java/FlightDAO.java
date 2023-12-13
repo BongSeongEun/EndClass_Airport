@@ -29,6 +29,7 @@ public class FlightDAO {
 
                 flights.add(flight);
             }
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }

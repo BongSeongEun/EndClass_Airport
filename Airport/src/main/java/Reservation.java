@@ -1,5 +1,3 @@
-
-
 public class Reservation {
     private int reservationId;
     private int userId;
