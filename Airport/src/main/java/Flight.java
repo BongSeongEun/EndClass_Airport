@@ -1,16 +1,18 @@
 public class Flight {
-    private int flightId;
+    private int ticketId;
     private String airlineId;
     private String source;
     private String destination;
     private String time;
     private String seat;
     private double price;
-	public int getFlightId() {
-		return flightId;
+    
+    
+	public int getTicketId() {
+		return ticketId;
 	}
-	public void setFlightId(int flightId) {
-		this.flightId = flightId;
+	public void setTicketId(int flightId) {
+		this.ticketId = flightId;
 	}
 	public String getAirlineId() {
 		return airlineId;

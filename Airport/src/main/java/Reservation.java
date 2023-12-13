@@ -3,7 +3,9 @@
 public class Reservation {
     private int reservationId;
     private int userId;
-    private int flightId;
+    private int ticketId;
+    
+    
 	public int getReservationId() {
 		return reservationId;
 	}
@@ -16,11 +18,11 @@ public class Reservation {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public int getFlightId() {
-		return flightId;
+	public int getTicketId() {
+		return ticketId;
 	}
-	public void setFlightId(int flightId) {
-		this.flightId = flightId;
+	public void setTicketId(int ticketId) {
+		this.ticketId = ticketId;
 	}
 
 }

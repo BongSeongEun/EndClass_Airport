@@ -19,7 +19,7 @@ public class FlightDAO {
 
             while (resultSet.next()) {
                 Flight flight = new Flight();
-                flight.setFlightId(resultSet.getInt("flightId"));
+                flight.setTicketId(resultSet.getInt("ticketId"));
                 flight.setAirlineId(resultSet.getString("airlineId"));
                 flight.setSource(resultSet.getString("source"));
                 flight.setDestination(resultSet.getString("destination"));

@@ -13,7 +13,7 @@ public class ReservationDAO {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1, reservation.getUserId());
-            preparedStatement.setInt(2, reservation.getFlightId());
+            preparedStatement.setInt(2, reservation.getTicketId());
 
             preparedStatement.executeUpdate();
 
@@ -38,7 +38,7 @@ public class ReservationDAO {
                 Reservation reservation = new Reservation();
                 reservation.setReservationId(resultSet.getInt("reservationId"));
                 reservation.setUserId(resultSet.getInt("userId"));
-                reservation.setFlightId(resultSet.getInt("flightId"));
+                reservation.setTicketId(resultSet.getInt("ticketId"));
 
                 return reservation;
             }

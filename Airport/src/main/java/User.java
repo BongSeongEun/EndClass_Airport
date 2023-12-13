@@ -1,9 +1,8 @@
-import java.util.List;
-
 public class User {
     private int userId;
     private String password;
-    private List<Reservation> reservations;
+    
+    
 	public int getUserId() {
 		return userId;
 	}
@@ -16,11 +15,4 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public List<Reservation> getReservations() {
-		return reservations;
-	}
-	public void setReservations(List<Reservation> reservations) {
-		this.reservations = reservations;
-	}
-
 }
