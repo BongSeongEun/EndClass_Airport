@@ -34,6 +34,19 @@ public class Controller extends HttpServlet {
 		f_dao = new FlightDAO();
     	r_dao = new ReservationDAO();
     	u_dao = new UserDAO() ;
+    	
+    	String view = "";
+    	if(request.getParameter("action") == null) {
+			getServletContext().getRequestDispatcher("/controller?action=flight");
+		}else {
+			switch(action) {
+			case "flight":
+			case "reservation":
+			case "user":
+	    	}
+			getServletContext().getRequestDispatcher("/"+view).forward(request, response);
+		}
+    	
 	}
 
 }
