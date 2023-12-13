@@ -6,12 +6,25 @@ import java.sql.SQLException;
 public class ReservationDAO {
     private Connection connection;
 
-    // 생성자, 연결 설정 메서드 등 필요한 코드 추가
+    public ReservationDAO() {
+        // 데이터베이스 연결 설정
+        String url = "jdbc:h2:~/test"; // H2 데이터베이스 URL
+        String user = "";
+        String password = "";
+
+        try {
+            Class.forName("org.h2.Driver");
+            connection = DriverManager.getConnection(url, user, password);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void addReservation(Reservation reservation) {
         String query = "INSERT INTO Reservations (userId, ticketId, rseat) VALUES (?, ?)";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query,
+                PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1, reservation.getUserId());
             preparedStatement.setInt(2, reservation.getTicketId());
             preparedStatement.setString(3, reservation.getRseat());
@@ -22,7 +35,7 @@ public class ReservationDAO {
             if (generatedKeys.next()) {
                 reservation.setReservationId(generatedKeys.getInt(1));
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -44,11 +57,36 @@ public class ReservationDAO {
 
                 return reservation;
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return null;
     }
+
+    public Reservation getReservationByUserId(String UserId) {
+        String query = "SELECT * FROM Reservations WHERE UserId = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, UserId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                Reservation reservation = new Reservation();
+                reservation.setReservationId(resultSet.getInt("reservationId"));
+                reservation.setUserId(resultSet.getInt("userId"));
+                reservation.setTicketId(resultSet.getInt("ticketId"));
+
+                return reservation;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 }
