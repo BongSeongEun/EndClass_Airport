@@ -37,12 +37,15 @@ public class Controller extends HttpServlet {
     	
     	String view = "";
     	if(request.getParameter("action") == null) {
-			getServletContext().getRequestDispatcher("/controller?action=flight");
+			getServletContext().getRequestDispatcher("/controller?action=main");
 		}else {
 			switch(action) {
-			case "flight":
-			case "reservation":
-			case "user":
+			case "main":
+				view = "Main.jsp";
+			case "login":
+				view = "Login.jsp";
+			case "mypage":
+				view = "Mypage.jsp";
 	    	}
 			getServletContext().getRequestDispatcher("/"+view).forward(request, response);
 		}
