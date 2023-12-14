@@ -110,7 +110,7 @@
                 <td>${l.Time}</td>
                 <td>${l.Price}</td>
                 <td>
-                    <button type="submit" id = "${l.FlightID}" name="reserveButton"> 예약하기 </button>
+                    <button type="submit" id = "btn" value = "${l.FlightID}" name="reserveButton"> 예약하기 </button>
                 </td>
             </tr>
         </c:forEach>
