@@ -67,6 +67,5 @@
 	<a href="login.jsp">로그인하기</a>
 	<!-- 이거 수정 필요 -->
     
-
 </body>
 </html>
