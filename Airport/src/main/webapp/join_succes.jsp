@@ -65,8 +65,9 @@
     </div>
         
         <h2>회원가입을 축하합니다</h2>
-        <a href="login.jsp">로그인하기</a>
-        <!--  이거 수정 필요 -->
+        <form method="post" action="air.nhn?action=login">
+            <button class="button" type="submit" id="login" name="로그인">로그인하기</button>
+            </form>
         
     
     </body>
