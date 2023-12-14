@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
 import java.sql.DriverManager;
 
 public class FlightDAO {
@@ -24,7 +23,8 @@ public class FlightDAO {
         }
     }
 
-    // 항공권ID -> {항공사, 출발지, 도착지, 시간, 가격} 보여줌
+    // 항공권ID - input: airplanId
+    // -> {항공사, 출발지, 도착지, 시간, 가격} 보여줌
     public List<Flight> getAirplaneID(int airplaneId) {
         List<Flight> flights = new ArrayList<>();
         String query = "SELECT (airline, source, destination, time, price)  FROM Flight WHERE airplaneId = ?";
@@ -49,6 +49,8 @@ public class FlightDAO {
 
         return flights;
     }
+
+    // 선택된 airplaneId?
 
     // 선택된 출발지/도착지로 된 항공권ID SELECT - input: 선택된 출발지, 선택된 도착지
     // {항공권ID} <- 출발지와 도착지가 같은 모든 항공권ID 테이블
@@ -75,7 +77,8 @@ public class FlightDAO {
     }
 
     // 모든 시트 표시
-    public List<Flight> getAllseats() {
+    // 선택된 시트(1110)같은 숫자 모음 다 보여주는걸로 수정?
+    public List<Flight> getAlltseats() {
         List<Flight> allseats = new ArrayList<>();
         String query = "SELECT seat FROM Flight";
 
@@ -98,7 +101,7 @@ public class FlightDAO {
     // 선택된 시트 저장 - input: 항공권ID(11) + 선택된 좌석번호(10)
     // {선택된 자리(1110)} 저장
     // -> SelectdSeats에 있는 숫자는 다시 못넣음 => 중복 조회 _ 확인용?
-    public List<Flight> SelectedSeats(int airplaneId, int seat) {
+    public List<Flight> addSelectedSeats(int airplaneId, int seat) {
 
         String airplanid_s = Integer.toString(airplaneId); // 11
         String selectseat_s = Integer.toString(seat); // 10
@@ -106,6 +109,7 @@ public class FlightDAO {
         int selectedSeatnum_i = Integer.parseInt(selectedSeatnum_s); // 1110
 
         String query = "INSERT INTO Flight (selectedseat_num) VALUES (?)";
+        // selectedseat_num == selectedseat_num 이면 빠꾸 아니면 저장
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, selectedSeatnum_i);
