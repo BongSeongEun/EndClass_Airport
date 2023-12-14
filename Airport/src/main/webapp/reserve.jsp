@@ -92,9 +92,17 @@
 <form method="post" action="SeatSelection.jsp">
     <label for="departure">Departure:</label>
     <select id="departure" name="departure" required>
-        <option value="Incheon">Incheon</option>
-        <option value="Gimpo">Gimpo</option>
-        <option value="Jeju">Jeju</option>
+        <option value="ICN">인천</option>
+        <option value="GMP">김포</option>
+        <option value="PUS">부산</option>
+        <option value="TAE">대구</option>
+        <option value="CJU">제주</option>
+        <option value="CJJ">청주</option>
+        <option value="KWJ">광주</option>
+        <option value="USN">울산</option>
+        <option value="RSU">여수</option>
+        
+        
     </select>
 
     <label for="destination">Destination:</label>
