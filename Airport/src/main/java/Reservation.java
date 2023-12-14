@@ -35,4 +35,8 @@ public class Reservation {
 	public void setSeatSelection(int SeatSelection) {
 		this.SeatSelection = SeatSelection;
 	}
+
+	
+
+
 }
