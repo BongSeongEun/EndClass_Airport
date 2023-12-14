@@ -100,17 +100,31 @@
         <option value="TAE">대구</option>
         <option value="CJU">제주</option>
         <option value="CJJ">청주</option>
-        <option value="KWJ">광주</option>
-        <option value="USN">울산</option>
-        <option value="RSU">여수</option>
-        
+        <option value="KIX">오카사</option>
+        <option value="TYO">도쿄</option>
+        <option value="FUK">후쿠오카</option>
+        <option value="OKA">오키나와</option>
+        <option value="CTS">삿포로</option>
+        <option value="NGO">나고야</option>
     </select>
 
     <label for="destination">Destination:</label>
     <select id="destination" name="destination" required>
-        <option value="AMS">암스테르담</option>
+        <option value="ICN">서울(인천)</option>
+    	<option value="GMP">서울(김포)</option>
+        <option value="ICN">인천</option>
+        <option value="GMP">김포</option>
+        <option value="PUS">부산</option>
+        <option value="TAE">대구</option>
+        <option value="CJU">제주</option>
+        <option value="CJJ">청주</option>
+        <option value="KIX">오카사</option>
+        <option value="TYO">도쿄</option>
+        <option value="FUK">후쿠오카</option>
+        <option value="OKA">오키나와</option>
         <option value="CTS">삿포로</option>
-        <option value="Japan">Japan</option>
+        <option value="NGO">나고야</option>
+        <option value="AMS">암스테르담</option>
     </select>
 
     <input type="submit" value="Next">
