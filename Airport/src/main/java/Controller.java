@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-@WebServlet(urlPatterns = "/new.nhn")
+@WebServlet(urlPatterns = "/air.nhn")
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ServletContext ctx;
@@ -42,12 +42,12 @@ public class Controller extends HttpServlet {
     	r_dao = new ReservationDAO();
     	u_dao = new UserDAO() ;
     	
-    	String view = "";
+    	
     
     	if(action ==null) {
 			action = "main";
 		}
-		
+    	String view = action;
 		
 		if(view.startsWith("redirect:/")) {
 			String rview =view.substring("redirect:/".length());
@@ -65,9 +65,7 @@ public class Controller extends HttpServlet {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 			
-		u.setUserId(id);
-		u.setPassword(pw);
-		u_dao.addUser(u);
+		u_dao.addUser(id,pw);
 			
 		return "main";
 	}
@@ -92,8 +90,8 @@ public class Controller extends HttpServlet {
 	public String getAllFlights(HttpServletRequest request) throws SQLException {
 		List<Flight> list;
 		try {
-			list = f_dao.getAllFlights();
-			request.setAttribute("flightlist", list);
+			
+			
 		}catch(Exception e){
 			e.printStackTrace();
 			ctx.log("뉴스 목록 생성 과정에서 문제 발생!!");
@@ -104,31 +102,27 @@ public class Controller extends HttpServlet {
 	public String setFlights(HttpServletRequest request) throws SQLException {
 		Flight f = new Flight();
 		int flightid = Integer.parseInt(request.getParameter("Flightid"));
-		f= f_dao.getAllSeat(flightid);
+		
 		request.setAttribute("seatlist", f);
 		request.setAttribute("flightId", flightid);
 		return "redirect:/news.nhn?action=setSelect";
 	}
 
 	public String setReservationId(HttpServletRequest request) throws SQLException {
-		String seat = request.getParameter("seat");
+		int seat = Integer.parseInt(request.getParameter("seat"));
 		int flightid = Integer.parseInt(request.getParameter("Flightid"));
 		Reservation r = new Reservation();
-		r.setRseat(seat);
-		r.setUserId(flightid); // 유저 아이디 받아오는 방법 생각하
-		r.setReservationId(flightid); //랜덤함수로 난수 넣기 
-		r.setTicketId(flightid);
-		r_dao.addReservation(r);
+
 		
 		return "main";
 	}
 	
 	public String getReservationById(HttpServletRequest request) throws SQLException {
 		String id = request.getParameter("id");
-		Reservation r =r_dao.getReservationById(id);
 		
 		
-		request.setAttribute("reservation", r);
+		
+	
 		
 		return "main";
 	}
