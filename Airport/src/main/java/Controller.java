@@ -2,6 +2,7 @@
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -112,7 +113,18 @@ public class Controller extends HttpServlet {
 	
 	//예약 화면 기능  
 	public void book(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-		String id = request.getParameter("depatch");
+		String departure = request.getParameter("departure");
+		String destintation = request.getParameter("destintation");
+		List<Flight> f = new ArrayList<>();
+		
+		List<Integer> l_id = f_dao.getCorrectAirplaneIds(departure,destintation);
+		
+		
+		for(int id :l_id){
+			f.add(f_dao.getAirplaneID(id));
+		}
+		
+		request.setAttribute("l_flight", f);
 	}
 	
 	
