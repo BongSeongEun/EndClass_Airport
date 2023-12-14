@@ -92,6 +92,7 @@
     
      <h2>예약 내약서</h2>
     <form method="post" action="air.nhn?action=home">
+    	<p>예약 번호 : ${flight.ReservationID}</p>
         <p>출발지: ${flight.DepartureAirport}</p>
     	<p>목적지: ${flight.ArrivalAirport}</p>
     	<p>항공사: ${flight.Airline}</p>
