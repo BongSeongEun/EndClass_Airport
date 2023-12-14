@@ -107,8 +107,20 @@
     <select id="seatSelection" name="seatSelection" required>
         <option value="A1">A1</option>
         <option value="A2">A2</option>
+        <option value="A3">A3</option>
+        <option value="A4">A4</option>
         <option value="B1">B1</option>
         <option value="B2">B2</option>
+        <option value="B3">B3</option>
+        <option value="B4">B4</option>
+        <option value="C1">C1</option>
+        <option value="C2">C2</option>
+        <option value="C3">C3</option>
+        <option value="C4">C4</option>
+        <option value="D1">D1</option>
+        <option value="D2">D2</option>
+        <option value="D3">D3</option>
+        <option value="D4">D4</option>
         <!-- 더 필요하면 추가... 나중에 더 제대로 꾸밀게 -->
     </select>
 
