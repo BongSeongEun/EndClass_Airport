@@ -1,18 +1,20 @@
 public class User {
-    private int userId;
+    private String userId;
     private String password;
     
     
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+	
 	public String getPassword() {
 		return password;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 }

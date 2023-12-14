@@ -18,24 +18,24 @@ public class UserDAO {
 
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
-                user.setUserId(generatedKeys.getInt(1));
+                user.setUserId(generatedKeys.getString(1));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public User getUserById(int userId) {
+    public User getUserById(String id) {
         String query = "SELECT * FROM Users WHERE userId = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, userId);
+            preparedStatement.setString(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
                 User user = new User();
-                user.setUserId(resultSet.getInt("userId"));
+                user.setUserId(resultSet.getString("userId"));
                 user.setPassword(resultSet.getString("password"));
 
                 return user;

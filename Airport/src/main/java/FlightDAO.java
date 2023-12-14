@@ -35,4 +35,31 @@ public class FlightDAO {
 
         return flights;
     }
+
+
+
+
+
+
+
+
+
+    public Flight getAllSeat(int id) {
+        String query = "SELECT * FROM Users WHERE userId = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+               
+                return new Flight();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

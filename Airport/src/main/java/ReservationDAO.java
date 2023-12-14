@@ -26,11 +26,11 @@ public class ReservationDAO {
         }
     }
 
-    public Reservation getReservationById(int reservationId) {
+    public Reservation getReservationById(String reservationId) {
         String query = "SELECT * FROM Reservations WHERE reservationId = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, reservationId);
+            preparedStatement.setString(1, reservationId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -48,4 +48,6 @@ public class ReservationDAO {
 
         return null;
     }
+
+
 }
