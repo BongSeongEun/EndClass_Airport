@@ -9,8 +9,32 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            margin: 50px;
             text-align: center;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .navbar {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 20px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            margin-right: 20px;
+        }
+
+
+        h1 {
+            color: #333;
         }
 
         form {
@@ -48,9 +72,10 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #218838; /* hover 시 색상 변경 */
+            background-color: #218838;
         }
     </style>
+    
 </head>
 <body>
 
