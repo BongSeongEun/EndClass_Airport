@@ -9,8 +9,33 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            margin: 50px;
+
             text-align: center;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .navbar {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            margin-right: 20px;
+        }
+
+
+        h1 {
+            color: #333;
         }
 
         form {
@@ -48,13 +73,22 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #218838; /* hover 시 색상 변경 */
+            background-color: #218838;
         }
     </style>
+    
 </head>
 <body>
 
-<h2>Airline Reservation</h2>
+	<div class="navbar">
+        <h2>Airline Reservation</h2>
+        <div>
+            <a href="reserve.jsp">항공 예약하기</a>
+            <a href="#">항공 예약 확인</a>
+            <a href="login.jsp">로그인</a>
+        </div>
+    </div>
+
 <form method="post" action="SeatSelection.jsp">
     <label for="departure">Departure:</label>
     <select id="departure" name="departure" required>

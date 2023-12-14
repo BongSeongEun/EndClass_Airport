@@ -1,77 +1,91 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Airline Reservation</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 50px;
-            text-align: center;
-        }
+<meta charset="UTF-8">
+<title>Join</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
-        }
+    .navbar {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        box-sizing: border-box;
+    }
 
-        h2 {
-            margin-bottom: 30px;
-        }
+    .navbar a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 18px;
+        margin-right: 20px;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 10px;
-            text-align: left;
-        }
+    h1 {
+        color: #333;
+    }
 
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-        }
+    .signup-link {
+        margin-top: 10px;
+    }
 
-        input[type="submit"] {
-            background-color: #28a745; /* 초록색으로 변경 */
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    .signup-link a {
+        color: #007bff;
+    }
 
-        input[type="submit"]:hover {
-            background-color: #218838; /* hover 시 색상 변경 */
-        }
-    </style>
+    .login-btn {
+        background-color: #4CAF50; /* Green */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    form input {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+</style>
 </head>
 <body>
-
-<h2>Airline Reservation</h2>
-<form method="post" action="SeatSelection.jsp">
-    <label for="departure">Departure:</label>
-    <select id="departure" name="departure" required>
-        <option value="Incheon">Incheon</option>
-        <option value="Gimpo">Gimpo</option>
-        <option value="Jeju">Jeju</option>
-    </select>
-
-    <label for="destination">Destination:</label>
-    <select id="destination" name="destination" required>
-        <option value="Jeju">Jeju</option>
-        <option value="Busan">Busan</option>
-        <option value="Japan">Japan</option>
-    </select>
-
-    <input type="submit" value="Next">
-</form>
-
+    <div class="navbar">
+        <h2>Airline Reservation</h2>
+        <div>
+            <a href="reserve.jsp">항공 예약하기</a>
+            <a href="#">항공 예약 확인</a>
+            <a href="login.jsp">로그인</a>
+        </div>	
+    </div>
+    
+    <h2>회원가입</h2>
+    <form action="join_ok.jsp" method="post">
+        아이디:<input type="text" name="id"><br/>
+        비밀번호:<input type="password" name="pw"><br/>
+        <input type="submit" class="login-btn" value="가입">
+    </form>
 </body>
 </html>
