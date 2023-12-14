@@ -26,12 +26,19 @@
             justify-content: space-between;
             width: 100%;
             box-sizing: border-box;
+            border:none;
+            padding: 10px 20px;
         }
 
         .navbar a {
             text-decoration: none;
             color: #fff;
             font-size: 18px;
+            margin-right: 20px;
+        }
+        
+        .button{
+            padding: 10px;
             margin-right: 20px;
         }
 
@@ -42,13 +49,18 @@
     </style>
 </head>
 <body>
-    	<div class="navbar">
+       <div class="navbar">
         <h2>Airline Reservation</h2>
-        <div>
-            <a href="reserve.jsp">항공 예약하기</a>
-            <a href="#">항공 예약 확인</a>
-            <a href="login.jsp">로그인</a>
-        </div>
+
+        <form method="post" action="air.nhn?action=reserve">
+            <button class="button" type="submit" id="reserve" name="항공 예약">항공 예약</button>
+        </form>
+        <form method="post" action="air.nhn?action=reserveCheck">
+            <button class="button" type="submit" id="reserveCheck" name="항공 예약 확인">항공 예약 확인</button>
+        </form>
+        <form method="post" action="air.nhn?action=login">
+            <button class="button" type="submit" id="login" name="로그인"> 로그인</button>
+        </form>
     </div>
 
 </body>
