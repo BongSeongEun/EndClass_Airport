@@ -19,7 +19,7 @@ public class Controller extends HttpServlet {
 	private ServletContext ctx;
 	FlightDAO f_dao;
 	ReservationDAO r_dao;
-	MemberDAO u_dao;
+	MemberDAO m_dao;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -28,32 +28,14 @@ public class Controller extends HttpServlet {
 		super.init(config);
 		f_dao = new FlightDAO();
 		r_dao = new ReservationDAO();
-		u_dao = new MemberDAO();
+		m_dao = new MemberDAO();
 	}
 
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String action = request.getParameter("action");
-		f_dao = new FlightDAO();
-		r_dao = new ReservationDAO();
-		u_dao = new MemberDAO();
-
-		if (action == null) {
-			action = "main";
-		}
-		String view = action;
-
-		if (view.startsWith("redirect:/")) {
-			String rview = view.substring("redirect:/".length());
-			response.sendRedirect(rview);
-		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/" + view + ".jsp");
-
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
@@ -77,6 +59,9 @@ public class Controller extends HttpServlet {
 					break;
 				case "getAllFlights":
 					getAllFlights(request, response);
+					break;
+				case "book":
+					book(request, response);
 					break;
 
 				case "setFlights":
@@ -104,12 +89,12 @@ public class Controller extends HttpServlet {
 
 	// 회원가입 화면 기능
 	public void addUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-		User u = new User();
+		Member m = new Member();
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		;
 
-		u_dao.addUser(id, pw);
+		m_dao.addMember(id, pw);
 		response.sendRedirect("air.nhn?action=main");
 
 	}
@@ -117,10 +102,10 @@ public class Controller extends HttpServlet {
 	// 로그인 화면 기능
 	public void getUserById(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 
-		User u = new User();
+		Member u = new Member();
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
-		u = u_dao.getUserById(id);
+		u = m_dao.getMemberById(id);
 		if (pw.equals(u.getPassword())) {
 			request.setAttribute("b_login", true);
 			request.setAttribute("user", u);
@@ -138,10 +123,10 @@ public class Controller extends HttpServlet {
 		String destintation = request.getParameter("destintation");
 		List<Flight> f = new ArrayList<>();
 
-		List<Integer> l_id = f_dao.getCorrectAirplaneIds(departure, destintation);
+		List<Integer> l_id = f_dao.getCorrectFlightIds(departure, destintation);
 
 		for (int id : l_id) {
-			f.add(f_dao.getAirplaneID(id));
+			f.add(f_dao.getFlightID(id));
 		}
 
 		request.setAttribute("l_flight", f);
