@@ -12,8 +12,31 @@
             margin: 50px;
             text-align: center;
         }
+        .navbar {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            width: 110%;
+            margin-left: -50px;
+            box-sizing: border-box;
+            border:none;
+            position: relative;
+            margin-top: -50px;
+        }
+        
+        .button{
+            padding: 10px;
+            background-color: #333;
+            padding: 10px 20px;
+            margin-top: 12px;
+            margin-right: 20px;
+            color: #f4f4f4;
+            font-size: 18px;
+            border: none;
+        }
 
-        form {
+        .formd {
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
@@ -42,7 +65,7 @@
             box-sizing: border-box;
         }
 
-        input[type="submit"] {
+        input{
             background-color: #28a745;
             color: #fff;
             padding: 10px 20px;
@@ -51,7 +74,7 @@
             cursor: pointer;
         }
 
-        input[type="submit"]:hover {
+        input:hover {
             background-color: #218838;
         }
     </style>
@@ -60,16 +83,22 @@
 
 	<div class="navbar">
         <h2>Airline Reservation</h2>
-        <div>
-            <a href="reserve.jsp">항공 예약하기</a>
-            <a href="#">항공 예약 확인</a>
-            <a href="login.jsp">로그인</a>
-        </div>
+
+        <form method="post" action="air.nhn?action=reserve">
+            <button style="margin-left: 1250px;" class="button" type="submit" id="reserve" name="항공 예약">항공 예약</button>
+        </form>
+        <form method="post" action="air.nhn?action=reserveCheck">
+            <button class="button" type="submit" id="reserveCheck" name="항공 예약 확인">항공 예약 확인</button>
+        </form>
+        <form method="post" action="air.nhn?action=login">
+            <button class="button" type="submit" id="login" name="로그인"> 로그인</button>
+        </form>
     </div>
+
 
 <h2>Airline Reservation - Seat Selection</h2>
 
-<form method="post" action="ReservationComplete.jsp">
+<form class="formd" method="post" action="ReservationComplete.jsp">
     <p>출발지: ${param.departure}</p>
     <p>목적지: ${param.destination}</p>
 
