@@ -124,7 +124,7 @@ public class Controller extends HttpServlet {
 		
 	
 		
-		return "main";
+		return "redirect:/news.nhn?action=join";
 	}
 	public String getReservation(HttpServletRequest request) throws SQLException {
 		
