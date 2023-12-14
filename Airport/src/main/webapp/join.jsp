@@ -35,8 +35,16 @@
         margin-right: 20px;
     }
 
-    h2 {
+    h1 {
         color: #333;
+    }
+
+    .signup-link {
+        margin-top: 10px;
+    }
+
+    .signup-link a {
+        color: #007bff;
     }
 
     .login-btn {
@@ -51,42 +59,15 @@
 
     form {
         margin-top: 20px;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        max-width: 400px;
-        margin: 0 auto;
     }
 
-    form label {
-        display: block;
-        margin: 10px 0 5px;
-        text-align: left;
-    }
-
-    form input,
-    form select {
+    form input {
         width: 100%;
         padding: 10px;
         margin: 8px 0;
         box-sizing: border-box;
         border: 1px solid #ccc;
         border-radius: 4px;
-    }
-
-    form input[type="radio"] {
-        margin-right: 5px;
-    }
-
-    form input[type="submit"] {
-        background-color: #4CAF50; /* Green */
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
     }
 </style>
 </head>
@@ -100,30 +81,10 @@
         </div>	
     </div>
     
+    <h2>회원가입</h2>
     <form action="join_ok.jsp" method="post">
-        <label for="id">아이디:</label>
-        <input type="text" name="id" required><br/>
-
-        <label for="pw">비밀번호:</label>
-        <input type="password" name="pw" required><br/>
-
-        <label for="name">이름:</label>
-        <input type="text" name="name" required><br/>
-
-        <label for="phone">전화번호:</label>
-        <select name="phon1">
-            <option>010</option>
-            <option>02</option>
-            <option>031</option>
-            <option>051</option>
-        </select>
-        - <input type="text" name="phone2" size="5">
-        - <input type="text" name="phone3" size="5"><br/>
-
-        <label>성별:</label>
-        <input type="radio" name="gender" value="m" checked>남자
-        <input type="radio" name="gender" value="f">여자<br/>
-
+        아이디:<input type="text" name="id"><br/>
+        비밀번호:<input type="password" name="pw"><br/>
         <input type="submit" class="login-btn" value="가입">
     </form>
 </body>
