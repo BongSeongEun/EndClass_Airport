@@ -35,4 +35,8 @@ public class Reservation {
 	public void setRseat(int rseat) {
 		this.rseat = rseat;
 	}
+
+	
+
+
 }
