@@ -89,5 +89,13 @@
             <button type="submit" id="login" name="로그인">로그인</button>
         </form>
     </div>
+    
+    <!-- 
+    여기에 그 시트들 만들어주세요
+    A1 A2 A3 A4
+    B1 B2 B3 B4
+    C1 C2 C3 C4
+    D1 D2 D3 D4
+     -->
 </body>
 </html>
