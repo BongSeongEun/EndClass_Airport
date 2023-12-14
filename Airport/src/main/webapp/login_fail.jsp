@@ -29,16 +29,19 @@
             border:none;
             padding: 10px 20px;
         }
+
         .navbar a {
             text-decoration: none;
             color: #fff;
             font-size: 18px;
             margin-right: 20px;
         }
+        
         .button{
             padding: 10px;
             margin-right: 20px;
         }
+
 
         h1 {
             color: #333;
@@ -61,7 +64,9 @@
     </div>
     
     <h2>아이디와 비밀번호를 확인하세요</h2>
-	<a href="login.jsp">다시 로그인하기</a>
+   <form method="post" action="air.nhn?action=login">
+            <button class="button" type="submit" id="login" name="로그인">로그인하기</button>
+    </form>
 
 </body>
 </html>

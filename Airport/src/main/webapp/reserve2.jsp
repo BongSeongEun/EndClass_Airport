@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
@@ -25,6 +25,7 @@
             background-size : cover;
             background-image: url("https://img.freepik.com/free-vector/watercolor-oil-painting-background_52683-107025.jpg?size=626&ext=jpg&ga=GA1.1.1546980028.1702512000&semt=sph");
         }
+
         .navbar {
             background-color: #333;
             color: #fff;
@@ -34,15 +35,18 @@
             width: 100%;
             box-sizing: border-box;
         }
+
         .navbar a {
             text-decoration: none;
             color: #fff;
             font-size: 18px;
             margin-right: 20px;
         }
+
         .navbar img {
             width: 100px; /* 이미지 너비 조절 */
         }
+
         .login-form {
             margin-top: 100px;
             padding: 100px;
@@ -52,15 +56,19 @@
             width: 700px;
             height: 700px;
         }
+
         h1 {
             color: #333;
         }
+
         .signup-link {
             margin-top: 10px;
         }
+
         .signup-link a {
             color: #007bff;
         }
+
         .login-btn {
             background-color: #4CAF50; /* 초록색 */
             color: white;

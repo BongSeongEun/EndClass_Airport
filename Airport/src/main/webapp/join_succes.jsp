@@ -18,6 +18,7 @@
             align-items: center;
             justify-content: center;
         }
+
         .navbar {
             background-color: #333;
             color: #fff;
@@ -29,6 +30,7 @@
             border:none;
             padding: 10px 20px;
         }
+
         .navbar a {
             text-decoration: none;
             color: #fff;
@@ -40,6 +42,8 @@
             padding: 10px;
             margin-right: 20px;
         }
+
+
         h1 {
             color: #333;
         }
@@ -61,7 +65,9 @@
     </div>
         
         <h2>회원가입을 축하합니다</h2>
-        <a href="login.jsp">로그인하기</a>
+        <form method="post" action="air.nhn?action=login">
+            <button class="button" type="submit" id="login" name="로그인">로그인하기</button>
+            </form>
         
     
     </body>

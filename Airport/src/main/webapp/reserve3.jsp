@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,6 +63,31 @@
             border: none;
             border-radius: 5px;
         }
+        .login-form {
+            margin-top: 100px;
+            padding: 100px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 700px;
+            height: 700px;
+        }
+        .button_seat{
+            background-color: #ffffff;
+            color: #333;
+            width: 100px;
+            height: 80px;
+            margin: 10px;
+            margin-bottom: 40px;
+            border-radius: 10%;
+        }
+        .button_seat:hover,
+        .button_seat:active{
+            background-color: #ec5858;
+        }
+        .button_seat:visited{
+            background-color: #ec5858;
+        } 
     </style>
 </head>
 <body>
@@ -81,13 +104,22 @@
             <button type="submit" id="login" name="로그인">로그인</button>
         </form>
     </div>
+    <div class="login-form">
+        <h3 style="padding: 20px;">좌석을 선택해주세용</h3>
+        <input class="button_seat" type="button" name="test" value="A1" onclick="color('#ec5858')" /> 
+        <input class="button_seat" type="button" name="test" value="A2" onclick="color('#ec5858')" /> 
+        <input class="button_seat" type="button" name="test" value="A3" onclick="color('#ec5858')" /> 
+        <input class="button_seat" type="button" name="test" value="A4" onclick="color('#ec5858')" /> <br>
+        <input class="button_seat" type="button" name="test" value="B1" onclick="color('#ec5858')" /> 
+        <input class="button_seat" type="button" name="test" value="B2" onclick="color('#ec5858')" /> 
+        <input class="button_seat" type="button" name="test" value="B3" onclick="color('#ec5858')" /> 
+        <input class="button_seat" type="button" name="test" value="B4" onclick="color('#ec5858')" /> <br>
+        <input class="button_seat" type="button" name="test" value="C1" onclick="color('#ec5858')" /> 
+        <input class="button_seat" type="button" name="test" value="C2" onclick="color('#ec5858')" /> 
+        <input class="button_seat" type="button" name="test" value="C3" onclick="color('#ec5858')" /> 
+        <input class="button_seat" type="button" name="test" value="C4" onclick="color('#ec5858')" /> 
+    </div>
 
-    <!-- 
-    여기에 그 시트들 만들어주세요
-    A1 A2 A3 A4
-    B1 B2 B3 B4
-    C1 C2 C3 C4
-    D1 D2 D3 D4
-     -->
+
 </body>
 </html>
