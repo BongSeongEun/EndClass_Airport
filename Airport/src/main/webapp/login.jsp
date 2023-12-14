@@ -17,6 +17,10 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            width: 100vw;
+            background-repeat : no-repeat;
+            background-size : cover;
+            background-image: url("https://img.freepik.com/free-vector/watercolor-oil-painting-background_52683-107025.jpg?size=626&ext=jpg&ga=GA1.1.1546980028.1702512000&semt=sph");
         }
 
         .navbar {
@@ -41,12 +45,13 @@
         }
 
         .login-form {
-            margin-top: 20px;
-            padding: 20px;
+            margin-top: 100px;
+            padding: 100px;
             background-color: #fff;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 700px;
+            height: 700px;
         }
 
         h1 {
@@ -72,13 +77,18 @@
 <body>
     <div class="navbar">
         <h2>Airline Reservation</h2>
-        <div>
-            <a href="reserve.jsp">항공 예약하기</a>
-            <a href="#">항공 예약 확인</a>
-            <a href="login.jsp">로그인</a>
-        </div>
+
+        <form method="post" action="air.nhn?action=reserve">
+            <button type="submit" id="reserve" name="항공 예약">항공 예약</button>
+        </form>
+        <form method="post" action="air.nhn?action=reserveCheck">
+            <button type="submit" id="reserveCheck" name="항공 예약 확인">항공 예약 확인</button>
+        </form>
+        <form method="post" action="air.nhn?action=login">
+            <button type="submit" id="login" name="로그인">로그인</button>
+        </form>
     </div>
-    <br>
+
 
     <div class="login-form">
         <h2>로그인</h2>
@@ -93,11 +103,11 @@
                 <label for="password">비밀번호:</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
-			<br>
+         <br>
             <button type="submit" id ="btn" class="btn login-btn">로그인</button>
         </form>
-		
-		<br>
+      
+      <br>
         <div class="signup-link">
             <p>계정이 없으신가요? <a href="join.jsp">회원가입</a></p>
         </div>
