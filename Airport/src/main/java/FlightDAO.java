@@ -95,28 +95,27 @@ public class FlightDAO {
         return allseats;
     }
 
-    // 선택된 시트 저장 - input: 항공권ID(11) + 선택된 좌석번호(10)
-    // {선택된 자리(1110)} 저장
-    // -> SelectdSeats에 있는 숫자는 다시 못넣음 => 중복 조회 _ 확인용?
-    public List<Flight> addSelectedSeats(int airplaneId, int seat) {
+    // // 선택된 시트 저장 - input: 항공권ID(11) + 선택된 좌석번호(10)
+    // // {선택된 자리(1110)} 저장
+    // // -> SelectdSeats에 있는 숫자는 다시 못넣음 => 중복 조회 _ 확인용?
+    // public List<Flight> addSelectedSeats(int FlightId, int seat) {
+    // String airplanid_s = Integer.toString(FlightId); // 11
+    // String selectseat_s = Integer.toString(seat); // 10
+    // String selectedSeatnum_s = airplanid_s + selectseat_s; // "1110"
+    // int selectedSeatnum_i = Integer.parseInt(selectedSeatnum_s); // 1110
 
-        String airplanid_s = Integer.toString(airplaneId); // 11
-        String selectseat_s = Integer.toString(seat); // 10
-        String selectedSeatnum_s = airplanid_s + selectseat_s; // "1110"
-        int selectedSeatnum_i = Integer.parseInt(selectedSeatnum_s); // 1110
+    // String query = "INSERT INTO Flight (selectedseat_num) VALUES (?)";
+    // // selectedseat_num == selectedseat_num 이면 빠꾸 아니면 저장
 
-        String query = "INSERT INTO Flight (selectedseat_num) VALUES (?)";
-        // selectedseat_num == selectedseat_num 이면 빠꾸 아니면 저장
+    // try (PreparedStatement preparedStatement =
+    // connection.prepareStatement(query)) {
+    // preparedStatement.setInt(1, selectedSeatnum_i);
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, selectedSeatnum_i);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
+    // } catch (SQLException e) {
+    // e.printStackTrace();
+    // }
+    // return null;
+    // }
 
 }
 

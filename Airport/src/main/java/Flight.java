@@ -6,7 +6,7 @@ public class Flight {
 	private String time;
 	private int seat;
 	private double price;
-	private int selectedseat_num;
+	// private int selectedseat_num;
 
 	public int getFlightId() {
 		return flightId;
@@ -64,11 +64,11 @@ public class Flight {
 		this.price = price;
 	}
 
-	public int getSelectedseat_num() {
-		return selectedseat_num;
-	}
+	// public int getSelectedseat_num() {
+	// return selectedseat_num;
+	// }
 
-	public void setSelectedseat_num(int selectedseat_num) {
-		this.selectedseat_num = selectedseat_num;
-	}
+	// public void setSelectedseat_num(int selectedseat_num) {
+	// this.selectedseat_num = selectedseat_num;
+	// }
 }
