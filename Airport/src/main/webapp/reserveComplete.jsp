@@ -90,16 +90,11 @@
         </form>
     </div>
     
-     <h2>예약 내역서</h2>
-    <form method="post" action="air.nhn?action=home">
-        <p>출발지: ${flight.DepartureAirport}</p>
-    	<p>목적지: ${flight.ArrivalAirport}</p>
-    	<p>항공사: ${flight.Airline}</p>
-    	<p>시간: ${flight.Time}</p>
-   		<p>선택 좌석:${flight.SeatSelection}</p>
-   		<p>가격: ${flight.Price}</p>
-        <button type="submit" class="login-btn">확인</button>
-    </form>
+    <br><br><br>
+    <h2>예약이 완료되었습니다!</h2>
+        <form method="post" action="air.nhn?action=home">
+            <button class="button" type="submit" id="home" name="home">돌아가기</button>
+        </form>
     
 
 </body>
