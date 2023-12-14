@@ -54,7 +54,15 @@
 </head>
 <body>
 
-<h2>Airline Reservation</h2>
+	<div class="navbar">
+        <h2>Airline Reservation</h2>
+        <div>
+            <a href="reserve.jsp">항공 예약하기</a>
+            <a href="#">항공 예약 확인</a>
+            <a href="login.jsp">로그인</a>
+        </div>
+    </div>
+
 <form method="post" action="SeatSelection.jsp">
     <label for="departure">Departure:</label>
     <select id="departure" name="departure" required>
