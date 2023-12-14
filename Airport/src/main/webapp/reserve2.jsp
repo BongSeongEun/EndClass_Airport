@@ -92,7 +92,7 @@
         </form>
     </div>
 
-<form method="post" action="air.nhn?action=book">
+<form method="post" action="air.nhn?action=selectSeat">
     <p>출발지: ${flight.DepartureAirport}</p>
     <p>목적지: ${flight.ArrivalAirport}</p>
 
@@ -110,7 +110,7 @@
                 <td>${l.Time}</td>
                 <td>${l.Price}</td>
                 <td>
-                    <button type="submit" name="reserveButton"> 예약하기 </button>
+                    <button type="submit" id = "${l.FlightID}" name="reserveButton"> 예약하기 </button>
                 </td>
             </tr>
         </c:forEach>
