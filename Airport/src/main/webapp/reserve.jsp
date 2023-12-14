@@ -9,6 +9,7 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
+
             text-align: center;
             padding: 0;
             display: flex;
@@ -19,7 +20,7 @@
         .navbar {
             background-color: #333;
             color: #fff;
-            padding: 20px 20px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             width: 100%;
