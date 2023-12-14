@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Join_Succes</title>
  <style>
         body {
             font-family: Arial, sans-serif;
