@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,6 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             text-align: center;
             background-color: #f4f4f4;
             margin: 0;
@@ -29,8 +29,14 @@
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
-            width: 101%;
+            width: 100%;
             box-sizing: border-box;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            margin-right: 20px;
         }
         .navbar img {
             width: 100px; /* 이미지 너비 조절 */
@@ -76,46 +82,7 @@
         </form>
     </div>
 
-<form method="post" action="air.nhn?action=book">
-     <label for="DepartureAirport">출발지:</label>
-    <select id="DepartureAirport" name="DepartureAirport" required>
-        <option value="ICN">서울(인천)</option>
-    	<option value="GMP">서울(김포)</option>
-        <option value="ICN">인천</option>
-        <option value="GMP">김포</option>
-        <option value="PUS">부산</option>
-        <option value="TAE">대구</option>
-        <option value="CJU">제주</option>
-        <option value="CJJ">청주</option>
-        <option value="KIX">오카사</option>
-        <option value="TYO">도쿄</option>
-        <option value="FUK">후쿠오카</option>
-        <option value="OKA">오키나와</option>
-        <option value="CTS">삿포로</option>
-        <option value="NGO">나고야</option>
-    </select>
 
-    <label for="ArrivalAirport">도착지:</label>
-    <select id="ArrivalAirport" name="ArrivalAirport" required>
-        <option value="ICN">서울(인천)</option>
-    	<option value="GMP">서울(김포)</option>
-        <option value="ICN">인천</option>
-        <option value="GMP">김포</option>
-        <option value="PUS">부산</option>
-        <option value="TAE">대구</option>
-        <option value="CJU">제주</option>
-        <option value="CJJ">청주</option>
-        <option value="KIX">오카사</option>
-        <option value="TYO">도쿄</option>
-        <option value="FUK">후쿠오카</option>
-        <option value="OKA">오키나와</option>
-        <option value="CTS">삿포로</option>
-        <option value="NGO">나고야</option>
-        <option value="AMS">암스테르담</option>
-    </select>
-
-    <input type="submit" value="Next">
-</form>
 
 </body>
 </html>
