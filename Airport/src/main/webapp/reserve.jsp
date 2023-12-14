@@ -89,9 +89,9 @@
         </div>
     </div>
 
-<form method="post" action="SeatSelection.jsp">
-    <label for="departure">Departure:</label>
-    <select id="departure" name="departure" required>
+<form method="post" action="air.nhn?action=book">
+     <label for="DepartureAirport">출발지:</label>
+    <select id="DepartureAirport" name="DepartureAirport" required>
         <option value="ICN">서울(인천)</option>
     	<option value="GMP">서울(김포)</option>
         <option value="ICN">인천</option>
@@ -108,8 +108,8 @@
         <option value="NGO">나고야</option>
     </select>
 
-    <label for="destination">Destination:</label>
-    <select id="destination" name="destination" required>
+    <label for="ArrivalAirport">도착지:</label>
+    <select id="ArrivalAirport" name="ArrivalAirport" required>
         <option value="ICN">서울(인천)</option>
     	<option value="GMP">서울(김포)</option>
         <option value="ICN">인천</option>
