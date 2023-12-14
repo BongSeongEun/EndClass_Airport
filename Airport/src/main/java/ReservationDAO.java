@@ -49,24 +49,24 @@ public class ReservationDAO {
 
     // 예약정보 생성 - input: 예약번호, 회원ID, 항공권ID, 선택된 좌석
     // -> {예약번호, 회원ID, 항공권ID, 선택된 좌석} 테이블 생성 후 INSERT
-    public List<Reservation> addRservation(int reservationId, String userId, int airplaneId, int seat) {
+    public List<Reservation> addRservation(int reservationId, String MemberId, int FlightId, int SeatSelection) {
         List<Reservation> reservations = new ArrayList<>();
-        String query = "INSERT INTO Reservations (reservationId, userId, airplaneId, rseat) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO Reservations (reservationId, MemberId, FlightId, SeatSelection) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, reservationId);
-            preparedStatement.setString(2, userId);
-            preparedStatement.setInt(3, airplaneId);
-            preparedStatement.setInt(4, seat);
+            preparedStatement.setString(2, MemberId);
+            preparedStatement.setInt(3, FlightId);
+            preparedStatement.setInt(4, SeatSelection);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 Reservation reservation = new Reservation();
                 reservation.setReservationId(resultSet.getInt(reservationId));
-                reservation.setUserId(resultSet.getString(userId));
-                reservation.setAirplaneId(resultSet.getInt(airplaneId));
-                reservation.setRseat(resultSet.getInt(seat));
+                reservation.setMemberId(resultSet.getString(MemberId));
+                reservation.setFlightId(resultSet.getInt(FlightId));
+                reservation.setSeatSelection(resultSet.getInt(SeatSelection));
 
                 reservations.add(reservation);
             }
@@ -80,20 +80,20 @@ public class ReservationDAO {
 
     // 예약정보 SELECT - input: 회원ID
     // -> {예약번호, 선택된 항공권ID, 선택된 좌석} 테이블 SELECT
-    public Reservation UserReservation(String userId) {
+    public Reservation UserReservation(String MemberId) {
         // List<Reservation> userreservations = new ArrayList<>();
-        String query = "SELECT reservationId, airplaneId, rseat FROM Reservations WHERE userId = ?";
+        String query = "SELECT reservationId, FlightId, SeatSelection FROM Reservations WHERE MemberId = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, userId);
+            preparedStatement.setString(1, MemberId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 Reservation reservation = new Reservation();
                 reservation.setReservationId(resultSet.getInt("reservationId"));
-                reservation.setAirplaneId(resultSet.getInt("selectedAirplaneId"));
-                reservation.setRseat(resultSet.getInt("selectedSeat"));
+                reservation.setFlightId(resultSet.getInt("selectedFlightId"));
+                reservation.setSeatSelection(resultSet.getInt("SeatSelection"));
                 return reservation;
             }
 
@@ -119,8 +119,8 @@ public class ReservationDAO {
             if (resultSet.next()) {
                 Reservation reservation = new Reservation();
                 reservation.setReservationId(resultSet.getInt("reservationId"));
-                reservation.setUserId(resultSet.getString("userId"));
-                reservation.setAirplaneId(resultSet.getInt("airplaneId"));
+                reservation.setMemberId(resultSet.getString("MemberId"));
+                reservation.setFlightId(resultSet.getInt("FlightId"));
 
                 return reservation;
             }

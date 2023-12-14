@@ -1,19 +1,19 @@
 public class Flight {
-	private int airplaneId;
+	private int flightId;
 	private String airline;
-	private String source;
-	private String destination;
+	private String departureairport;
+	private String arrivalairport;
 	private String time;
 	private int seat;
 	private double price;
 	private int selectedseat_num;
 
-	public int getAirplaneId() {
-		return airplaneId;
+	public int getFlightId() {
+		return flightId;
 	}
 
-	public void setAirplaneId(int airplaneId) {
-		this.airplaneId = airplaneId;
+	public void setFlightId(int flightId) {
+		this.flightId = flightId;
 	}
 
 	public String getAirline() {
@@ -24,20 +24,20 @@ public class Flight {
 		this.airline = airlineId;
 	}
 
-	public String getSource() {
-		return source;
+	public String getDepartureairport() {
+		return departureairport;
 	}
 
-	public void setSource(String source) {
-		this.source = source;
+	public void setDepartureairport(String departureairport) {
+		this.departureairport = departureairport;
 	}
 
-	public String getDestination() {
-		return destination;
+	public String getArrivalairport() {
+		return arrivalairport;
 	}
 
-	public void setDestination(String destination) {
-		this.destination = destination;
+	public void setArrivalairport(String arrivalairport) {
+		this.arrivalairport = arrivalairport;
 	}
 
 	public String getTime() {

@@ -13,7 +13,7 @@ public class FlightDAO {
         // 데이터베이스 연결 설정
         String url = "jdbc:h2:~/test"; // H2 데이터베이스 URL
         String user = "jwbook";
-        String password = "1111";
+        String password = "1234";
 
         try {
             Class.forName("org.h2.Driver");
@@ -25,38 +25,35 @@ public class FlightDAO {
 
     // 항공권ID - input: airplanId
     // -> {항공사, 출발지, 도착지, 시간, 가격} 보여줌
-    public List<Flight> getAirplaneID(int airplaneId) {
-        List<Flight> flights = new ArrayList<>();
-        String query = "SELECT (airline, source, destination, time, price)  FROM Flight WHERE airplaneId = ?";
+    public Flight getFlightID(int flightId) {
+        Flight flight = new Flight();
+        String query = "SELECT (airline, departureairport, arrivalairport, time, price) FROM Flight WHERE flightId = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, airplaneId);
+            preparedStatement.setInt(1, flightId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                Flight flight = new Flight();
                 flight.setAirline(resultSet.getString("airline"));
-                flight.setSource(resultSet.getString("source"));
-                flight.setDestination(resultSet.getString("destination"));
+                flight.setDepartureairport(resultSet.getString("departureairport"));
+                flight.setArrivalairport(resultSet.getString("arrivalairport"));
                 flight.setTime(resultSet.getString("time"));
                 flight.setPrice(resultSet.getDouble("price"));
-
-                flights.add(flight);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return flights;
+        return flight;
     }
 
     // 선택된 airplaneId?
 
     // 선택된 출발지/도착지로 된 항공권ID SELECT - input: 선택된 출발지, 선택된 도착지
     // {항공권ID} <- 출발지와 도착지가 같은 모든 항공권ID 테이블
-    public List<Integer> getCorrectAirplaneIds(String selectedSource, String selectedDestination) {
-        List<Integer> CorrectAirplaneIds = new ArrayList<>();
-        String query = "SELECT airplaneId FROM Flight WHERE source = ? AND destination = ?";
+    public List<Integer> getCorrectFlightIds(String selectedSource, String selectedDestination) {
+        List<Integer> CorrectFlightIds = new ArrayList<>();
+        String query = "SELECT flightId FROM Flight WHERE departureairport = '?' AND arrivalairport = '?'";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, selectedSource);
@@ -65,15 +62,15 @@ public class FlightDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                int AirplaneID = resultSet.getInt("AirplaneID");
-                CorrectAirplaneIds.add(AirplaneID);
+                int FlightId = resultSet.getInt("flightId");
+                CorrectFlightIds.add(FlightId);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return CorrectAirplaneIds;
+        return CorrectFlightIds;
     }
 
     // 모든 시트 표시
