@@ -64,7 +64,7 @@
     </div>
     
     <h2>아이디와 비밀번호를 확인하세요</h2>
-	<form method="post" action="air.nhn?action=login">
+   <form method="post" action="air.nhn?action=login">
             <button class="button" type="submit" id="login" name="로그인">로그인하기</button>
     </form>
 
