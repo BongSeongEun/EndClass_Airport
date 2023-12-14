@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Flight {
 	private int airplaneId;
 	private String airline;
@@ -6,6 +8,7 @@ public class Flight {
 	private String time;
 	private String seat;
 	private double price;
+	private int selectseat;
 
 	public int getAirplaneId() {
 		return airplaneId;
@@ -19,8 +22,8 @@ public class Flight {
 		return airline;
 	}
 
-	public void setAirline(String airline) {
-		this.airline = airline;
+	public void setAirline(String airlineId) {
+		this.airline = airlineId;
 	}
 
 	public String getSource() {
@@ -51,7 +54,7 @@ public class Flight {
 		return seat;
 	}
 
-	public void setSeat(String seat) {
+	public void setSeat(List<String> seats) {
 		this.seat = seat;
 	}
 

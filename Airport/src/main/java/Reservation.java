@@ -1,37 +1,38 @@
 public class Reservation {
-    private int reservationId;
-    private int userId;
-    private int ticketId;
-    private String rseat;
-    
-    
+	private int reservationId;
+	private String userId;
+	private int airplaneId;
+	private int rseat;
+
 	public int getReservationId() {
 		return reservationId;
 	}
+
 	public void setReservationId(int reservationId) {
 		this.reservationId = reservationId;
 	}
-	
-	public int getUserId() {
+
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
-	
-	public int getTicketId() {
-		return ticketId;
-	}
-	public void setTicketId(int ticketId) {
-		this.ticketId = ticketId;
+
+	public int getAirplaneId() {
+		return airplaneId;
 	}
 
-	
-	public String getRseat() {
+	public void setAirplaneId(int airplaneId) {
+		this.airplaneId = airplaneId;
+	}
+
+	public int getRseat() {
 		return rseat;
 	}
-	public void setRseat(String rseat) {
+
+	public void setRseat(int rseat) {
 		this.rseat = rseat;
 	}
 }

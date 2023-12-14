@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
+import java.sql.DriverManager;
 
 public class FlightDAO {
     private Connection connection;
@@ -12,8 +13,8 @@ public class FlightDAO {
     public FlightDAO() {
         // 데이터베이스 연결 설정
         String url = "jdbc:h2:~/test"; // H2 데이터베이스 URL
-        String user = "";
-        String password = "";
+        String user = "jwbook";
+        String password = "1111";
 
         try {
             Class.forName("org.h2.Driver");
@@ -23,59 +24,10 @@ public class FlightDAO {
         }
     }
 
-    // public List<Flight> getAllFlights() {
-    // List<Flight> flights = new ArrayList<>();
-    // String query = "SELECT * WHERE AirplaneId = ?";
-
-    // try (PreparedStatement preparedStatement =
-    // connection.prepareStatement(query)) {
-    // ResultSet resultSet = preparedStatement.executeQuery();
-
-    // while (resultSet.next()) {
-    // Flight flight = new Flight();
-    // flight.setAirline(resultSet.getString("airline"));
-    // flight.setSource(resultSet.getString("source"));
-    // flight.setDestination(resultSet.getString("destination"));
-    // flight.setTime(resultSet.getString("time"));
-    // flight.setPrice(resultSet.getDouble("price"));
-
-    // flights.add(flight);
-    // }
-    // } catch (SQLException e) {
-    // e.printStackTrace();
-    // }
-
-    // return flights;
-    // }
-
-    // public List<Flight> getSeats() {
-    // List<Flight> seats = new ArrayList<>();
-    // String query = "SELECT * WHERE Seat = '?'";
-
-    // try (PreparedStatement preparedStatement =
-    // connection.prepareStatement(query)) {
-    // ResultSet resultSet = preparedStatement.executeQuery();
-
-    // while (resultSet.next()) {
-    // int airplaneId = resultSet.getInt("AirplaneID");
-
-    // Flight seatS = new Flight();
-    // seatS.setSeat(resultSet.getString("seat"));
-
-    // seats.add(airplaneId + "+" + seatS.getSeat());
-    // }
-    // } catch (SQLException e) {
-    // e.printStackTrace();
-    // }
-
-    // return seats;
-    // }
-
     public class FlightDao {
-
-        public List<Flight> getAllFlights() {
+        public List<Flight> getAirplaneID() {
             List<Flight> flights = new ArrayList<>();
-            String query = "SELECT * FROM Flights";
+            String query = "SELECT * FROM Flight WHERE airplaneId = ?";
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 ResultSet resultSet = preparedStatement.executeQuery();
@@ -88,11 +40,6 @@ public class FlightDAO {
                     flight.setTime(resultSet.getString("time"));
                     flight.setPrice(resultSet.getDouble("price"));
 
-                    String seatString = resultSet.getString("seat");
-                    String[] seats = seatString.split(",");
-
-                    flight.setSeat(Arrays.asList(seats));
-
                     flights.add(flight);
                 }
             } catch (SQLException e) {
@@ -103,9 +50,11 @@ public class FlightDAO {
         }
     }
 
+    // 선택된 출발지/도착지로 된 항공권ID 뽑기 -> input: 선택된 출발지, 선택된 도착지
+    // {항공권ID} <- 출발지와 도착지가 같은 모든 항공권ID 테이블
     public List<Integer> getCorrectAirplaneIds(String selectedSource, String selectedDestination) {
         List<Integer> CorrectAirplaneIds = new ArrayList<>();
-        String query = "SELECT AirplaneID FROM Flight WHERE Source = ? AND Destination = ?";
+        String query = "SELECT airplaneID FROM Flight WHERE source = ? AND destination = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, selectedSource);
@@ -146,4 +95,43 @@ public class FlightDAO {
 
         return allseats;
     }
+
 }
+
+// public List<Flight> getAllFlights() {
+// List<Flight> flights = new ArrayList<>();
+// String query = "SELECT * WHERE AirplaneId = ?";
+// try (PreparedStatement preparedStatement =
+// connection.prepareStatement(query)) {
+// ResultSet resultSet = preparedStatement.executeQuery();
+// while (resultSet.next()) {
+// Flight flight = new Flight();
+// flight.setAirline(resultSet.getString("airline"));
+// flight.setSource(resultSet.getString("source"));
+// flight.setDestination(resultSet.getString("destination"));
+// flight.setTime(resultSet.getString("time"));
+// flight.setPrice(resultSet.getDouble("price"));
+// flights.add(flight);
+// }
+// } catch (SQLException e) {
+// e.printStackTrace();
+// }
+// return flights;
+// }
+// public List<Flight> getSeats() {
+// List<Flight> seats = new ArrayList<>();
+// String query = "SELECT * WHERE Seat = '?'";
+// try (PreparedStatement preparedStatement =
+// connection.prepareStatement(query)) {
+// ResultSet resultSet = preparedStatement.executeQuery();
+// while (resultSet.next()) {
+// int airplaneId = resultSet.getInt("AirplaneID");
+// Flight seatS = new Flight();
+// seatS.setSeat(resultSet.getString("seat"));
+// seats.add(airplaneId + "+" + seatS.getSeat());
+// }
+// } catch (SQLException e) {
+// e.printStackTrace();
+// }
+// return seats;
+// }

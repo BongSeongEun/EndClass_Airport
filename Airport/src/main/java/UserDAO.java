@@ -1,7 +1,10 @@
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
     private Connection connection;
@@ -9,8 +12,8 @@ public class UserDAO {
     public UserDAO() {
         // 데이터베이스 연결 설정
         String url = "jdbc:h2:~/test"; // H2 데이터베이스 URL
-        String user = "";
-        String password = "";
+        String user = "jwbook";
+        String password = "1111";
 
         try {
             Class.forName("org.h2.Driver");
@@ -20,19 +23,23 @@ public class UserDAO {
         }
     }
 
-    public void addUser(User user) {
-        String query = "INSERT INTO Users (password) VALUES (?)";
+    public void addUser(String userId, String password) {
+        List<User> users = new ArrayList<>();
+        String query = "INSERT INTO Users (userId. password) VALUES (?,?)";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query,
-                PreparedStatement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(1, user.getPassword());
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            preparedStatement.executeUpdate();
+            preparedStatement.setString(1, userId);
+            preparedStatement.setString(2, password);
 
-            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                user.setUserId(generatedKeys.getString(1));
-            }
+            ResultSet resultSet = preparedStatement.executeQuery();
+            User user = new User();
+
+            user.setUserId(resultSet.getString("userId"));
+            user.setPassword(resultSet.getString("password"));
+
+            users.add(user);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
