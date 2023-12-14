@@ -81,20 +81,22 @@
 
     <div class="login-form">
         <h2>로그인</h2>
+        <br>
         <form method="post" action="/Airport/login">
             <div class="form-group">
                 <label for="username">아이디:</label>
-                <input type="text" class="form-control" id="id" name="id" required>
+                <input type="text" class="form-control" id="id" name="id" required = "">
             </div>
 
             <div class="form-group">
                 <label for="password">비밀번호:</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
-
-            <button type="button" class="btn login-btn">로그인</button>
+			<br>
+            <button type="submit" id ="btn" class="btn login-btn">로그인</button>
         </form>
-
+		
+		<br>
         <div class="signup-link">
             <p>계정이 없으신가요? <a href="join.jsp">회원가입</a></p>
         </div>
