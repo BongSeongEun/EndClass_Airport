@@ -29,7 +29,6 @@ public class UserDAO {
         String query = "INSERT INTO Users (userId. password) VALUES (?,?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
             preparedStatement.setString(1, userId);
             preparedStatement.setString(2, password);
 

@@ -1,12 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Join_Fail</title>
-</head>
-
+<title>Join_Succes</title>
  <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,11 +38,9 @@
             color: #333;
         }
     </style>
-    
-    
+</head>
 <body>
-
-	<div class="navbar">
+    	<div class="navbar">
         <h2>Airline Reservation</h2>
         <div>
             <a href="reserve.jsp">항공 예약하기</a>
@@ -54,9 +48,10 @@
             <a href="login.jsp">로그인</a>
         </div>
     </div>
-
-	<h2>회원가입에 실패했습니다</h2>
-	<a href="join.jsp">다시 가입하기</a>
+    
+    <h2>회원가입을 축하합니다</h2>
+	<a href="login.jsp">로그인하기</a>
+    
 
 </body>
 </html>

@@ -78,8 +78,8 @@ public class ReservationDAO {
         return null;
     }
 
-    // 예약정보 출력 - input: 회원ID
-    // -> {예약번호, 선택된 항고권ID, 선택된 좌석} 테이블 SELECT
+    // 예약정보 SELECT - input: 회원ID
+    // -> {예약번호, 선택된 항공권ID, 선택된 좌석} 테이블 SELECT
     public Reservation UserReservation(String userId) {
         // List<Reservation> userreservations = new ArrayList<>();
         String query = "SELECT reservationId, airplaneId, rseat FROM Reservations WHERE userId = ?";
