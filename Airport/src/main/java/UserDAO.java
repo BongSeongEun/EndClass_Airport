@@ -23,6 +23,7 @@ public class UserDAO {
         }
     }
 
+    // User 객체 생성해서 사용자를 데이터베이스에 추가
     public void addUser(String userId, String password) {
         List<User> users = new ArrayList<>();
         String query = "INSERT INTO Users (userId. password) VALUES (?,?)";
@@ -45,6 +46,7 @@ public class UserDAO {
         }
     }
 
+    // 사용자 ID에 해당하는 사용자 정보를 데이터베이스에서 조회 있으면 User객체 반환 없으면 null 반환
     public User getUserById(String userId) {
         String query = "SELECT * FROM Users WHERE userId = ?";
 
