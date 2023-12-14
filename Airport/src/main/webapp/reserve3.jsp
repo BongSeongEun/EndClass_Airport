@@ -89,8 +89,5 @@
             <button type="submit" id="login" name="로그인">로그인</button>
         </form>
     </div>
-    
-    
-    
 </body>
 </html>
