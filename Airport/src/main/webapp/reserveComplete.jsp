@@ -89,7 +89,18 @@
             <button type="submit" id="login" name="로그인">로그인</button>
         </form>
     </div>
-
+    
+     <h2>예약 내역서</h2>
+    <form method="post" action="air.nhn?action=home">
+        <p>출발지: ${flight.DepartureAirport}</p>
+    	<p>목적지: ${flight.ArrivalAirport}</p>
+    	<p>항공사: ${flight.Airline}</p>
+    	<p>시간: ${flight.Time}</p>
+   		<p>선택 좌석:${flight.SeatSelection}</p>
+   		<p>가격: ${flight.Price}</p>
+        <button type="submit" class="login-btn">확인</button>
+    </form>
+    
 
 </body>
 </html>
