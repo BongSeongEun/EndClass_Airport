@@ -1,17 +1,24 @@
 
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/controller")
+
+
+@WebServlet(urlPatterns = "/new.nhn")
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private ServletContext ctx;
 	FlightDAO f_dao;
 	ReservationDAO r_dao;
 	UserDAO u_dao;
@@ -36,20 +43,91 @@ public class Controller extends HttpServlet {
     	u_dao = new UserDAO() ;
     	
     	String view = "";
-    	if(request.getParameter("action") == null) {
-			getServletContext().getRequestDispatcher("/controller?action=main");
+    
+    	if(action ==null) {
+			action = "main";
+		}
+		
+		
+		if(view.startsWith("redirect:/")) {
+			String rview =view.substring("redirect:/".length());
+			response.sendRedirect(rview);
 		}else {
-			switch(action) {
-			case "main":
-				view = "Main.jsp";
-			case "login":
-				view = "Login.jsp";
-			case "mypage":
-				view = "Mypage.jsp";
-	    	}
-			getServletContext().getRequestDispatcher("/"+view).forward(request, response);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/"+view+".jsp");
+			dispatcher.forward(request, response);
+			
 		}
     	
 	}
+	
+	public String addUser(HttpServletRequest request) throws SQLException {
+		User u = new User();
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+			
+		u.setUserId(id);
+		u.setPassword(pw);
+		u_dao.addUser(u);
+			
+		return "main";
+	}
+	public String getUserById(HttpServletRequest request) throws SQLException {
 
+			User u = new User();
+			String id = request.getParameter("id");
+			String pw = request.getParameter("pw");
+			u = u_dao.getUserById(id);
+			if(pw.equals(u.getPassword())){
+				request.setAttribute("b_login",true);
+				request.setAttribute("user",u);
+				
+				return "main";
+			}else {
+				request.setAttribute("b_login",false);
+				return "redirect:/news.nhn?action=login";
+			}
+	}
+	
+	
+	public String getAllFlights(HttpServletRequest request) throws SQLException {
+		List<Flight> list;
+		try {
+			list = f_dao.getAllFlights();
+			request.setAttribute("flightlist", list);
+		}catch(Exception e){
+			e.printStackTrace();
+			ctx.log("뉴스 목록 생성 과정에서 문제 발생!!");
+			request.setAttribute("error", "뉴스 목록이 정상적으로 처리되지 않았습니다!!");
+		} 
+		return "redirect:/news.nhn?action=reserve";
+	}
+	public String setFlights(HttpServletRequest request) throws SQLException {
+		Flight f = new Flight();
+		int id = Integer.parseInt(request.getParameter("id"));
+		f= f_dao.getAllSeat(id);
+		request.setAttribute("seatlist", f);
+		return "main";
+	}
+	public String getReservationById(HttpServletRequest request) throws SQLException {
+		String id = request.getParameter("id");
+		Reservation r =r_dao.getReservationById(id);
+		
+		
+		request.setAttribute("reservation", r);
+		
+		return "main";
+	}
+	public String getReservation(HttpServletRequest request) throws SQLException {
+		
+		Reservation r = new Reservation();
+		
+		request.setAttribute("reservation", r);
+		return "main";
+	}
+	
+	
+	
+	
+	
 }
+
