@@ -1,4 +1,5 @@
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,12 +7,25 @@ import java.sql.SQLException;
 public class UserDAO {
     private Connection connection;
 
-    // 생성자, 연결 설정 메서드 등 필요한 코드 추가
+    public UserDAO() {
+        // 데이터베이스 연결 설정
+        String url = "jdbc:h2:~/test"; // H2 데이터베이스 URL
+        String user = "";
+        String password = "";
+
+        try {
+            Class.forName("org.h2.Driver");
+            connection = DriverManager.getConnection(url, user, password);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void addUser(User user) {
         String query = "INSERT INTO Users (password) VALUES (?)";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query,
+                PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, user.getPassword());
 
             preparedStatement.executeUpdate();
@@ -25,11 +39,14 @@ public class UserDAO {
         }
     }
 
-    public User getUserById(String id) {
+
+   
+    public User getUserById(String userId) {
         String query = "SELECT * FROM Users WHERE userId = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, id);
+            preparedStatement.setString(1, userId);
+
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
