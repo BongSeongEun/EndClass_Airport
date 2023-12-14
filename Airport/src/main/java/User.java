@@ -3,7 +3,7 @@ public class User {
     private String password;
     
     
-	public String getUserId() {
+    public String getUserId() {
 		return userId;
 	}
 	public void setUserId(String userId) {
@@ -16,4 +16,5 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 }

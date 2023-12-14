@@ -78,6 +78,7 @@
             <a href="login.jsp">로그인</a>
         </div>
     </div>
+    <br>
 
     <div class="login-form">
         <h2>로그인</h2>
