@@ -42,7 +42,10 @@ public class MemberDAO {
 
               members.add(member);
         }catch (SQLException e) {
+
             e.printStackTrace();
+        } finally {
+            close();
         }
     }
 
@@ -54,6 +57,7 @@ public class MemberDAO {
         Connection conn = open();
         PreparedStatement preparedStatement = conn.prepareStatement(query);
         try{
+
             preparedStatement.setString(1, Id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -65,8 +69,10 @@ public class MemberDAO {
 
                 return member;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
 
         return null;

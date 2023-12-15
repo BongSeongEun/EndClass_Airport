@@ -101,7 +101,7 @@
             <form method="post" action="air.nhn?action=reserve">
                 <button style="margin-left: 1350px;" class="button" type="submit" id="reserve" name="항공 예약">항공 예약</button>
             </form>
-            <form method="post" action="air.nhn?action=reserveCheck">
+            <form method="post" action="air.nhn?action=CheckReserve">
                 <button class="button" type="submit" id="reserveCheck" name="항공 예약 확인">항공 예약 확인</button>
             </form>
             <form method="post" action="air.nhn?action=login">
@@ -111,6 +111,7 @@
         <div class="login-form">
         <h2>회원가입</h2>
         <form action="air.nhn?action=join_succes" method="post">
+
             아이디:<input type="text" name="id"><br/>
             비밀번호:<input type="password" name="pw"><br/>
             <input type="submit" class="login-btn" value="가입">

@@ -56,7 +56,7 @@
         <form method="post" action="air.nhn?action=reserve">
             <button class="button" type="submit" id="reserve" name="항공 예약">항공 예약</button>
         </form>
-        <form method="post" action="/Airport/air.nhn?action=getReservationById">
+        <form method="post" action="/Airport/air.nhn?action=CheckReserve">
             <button class="button" type="submit" id="reserveCheck" name="항공 예약 확인">항공 예약 확인</button>
         </form>
         <form method="post" action="air.nhn?action=login">

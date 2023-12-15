@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -21,6 +22,8 @@ public class Controller extends HttpServlet {
 	ReservationDAO r_dao;
 	MemberDAO m_dao;
 
+	Member member;
+	boolean b_login =false;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -45,6 +48,7 @@ public class Controller extends HttpServlet {
 			throws ServletException, IOException {
 		String action = request.getParameter("action");
 
+		b_login = Boolean.parseBoolean(request.getParameter("b_login"));
 		if (action == null) {
 			action = "main"; // 기본 액션으로 항공권 목록 표시
 		}
@@ -57,25 +61,16 @@ public class Controller extends HttpServlet {
 				case "getUserById":
 					getUserById(request, response);
 					break;
-				case "getAllFlights":
-					getAllFlights(request, response);
-					break;
 				case "book":
 					book(request, response);
 					break;
-
-				case "setFlights":
-					setFlights(request, response);
+				case "toreserve3":
+					toreserve3(request, response);
 					break;
-				case "setReservationId":
-					setReservationId(request, response);
-					break;
-				case "getReservationById":
-					getReservationById(request, response);
-					break;
-				case "getReservation":
-					getReservationById(request, response);
-					break;
+				case "selectSeat":
+					selectSeat(request, response);
+				case "CheckReserve":
+					CheckReserve(request, response);
 				default:
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/" + action + ".jsp");
 					dispatcher.forward(request, response);
@@ -92,33 +87,34 @@ public class Controller extends HttpServlet {
 		Member m = new Member();
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
-		;
+		
 
 		m_dao.addMember(id, pw);
-		response.sendRedirect("air.nhn?action=main");
+		response.sendRedirect("air.nhn?action=join_succes");
 
 	}
 
 	// 로그인 화면 기능
 	public void getUserById(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 
-		Member u = new Member();
+		Member m = new Member();
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
-		u = m_dao.getMemberById(id);
-		if (pw.equals(u.getPassword())) {
-			request.setAttribute("b_login", true);
-			request.setAttribute("user", u);
-
-			response.sendRedirect("air.nhn?action=login");
+		m = m_dao.getMemberById(id);
+		if (pw.equals(m.getPassword())) {
+			member = m;
+			b_login =true;
+			request.setAttribute("user", m);
+			response.sendRedirect("air.nhn?action=main");
 		} else {
-			request.setAttribute("b_login", false);
-			response.sendRedirect("air.nhn?action=login");
+			member = new Member();
+			b_login =false;
+			response.sendRedirect("air.nhn?action=login_fall");
 		}
 	}
 
 	// 예약 화면 기능
-	public void book(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+	public void book(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		String departure = request.getParameter("departure");
 		String destintation = request.getParameter("destintation");
 		List<Flight> f = new ArrayList<>();
@@ -130,48 +126,52 @@ public class Controller extends HttpServlet {
 		}
 
 		request.setAttribute("l_flight", f);
+		
+		response.sendRedirect("air.nhn?action=reserve2");
 	}
-
-	public String getAllFlights(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-		List<Flight> list;
-		try {
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			ctx.log("뉴스 목록 생성 과정에서 문제 발생!!");
-			request.setAttribute("error", "뉴스 목록이 정상적으로 처리되지 않았습니다!!");
-		}
-		return "redirect:/news.nhn?action=reserve";
+	public void toreserve3(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		int flightid = Integer.parseInt(request.getParameter("btn"));
+		
+		
+		request.setAttribute("flightid",flightid );
+		
+		
+		response.sendRedirect("air.nhn?action=reserve3");
 	}
-
-	public String setFlights(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-		Flight f = new Flight();
-		int flightid = Integer.parseInt(request.getParameter("Flightid"));
-
-		request.setAttribute("seatlist", f);
-		request.setAttribute("flightId", flightid);
-		return "redirect:/news.nhn?action=setSelect";
-	}
-
-	public String setReservationId(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+	
+	public void selectSeat(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		
+		 Random random = new Random(); //랜덤 객체 생성(디폴트 시드값 : 현재시간)
+	     random.setSeed(System.currentTimeMillis());
 		int seat = Integer.parseInt(request.getParameter("seat"));
-		int flightid = Integer.parseInt(request.getParameter("Flightid"));
+		int flightid = Integer.parseInt(request.getParameter("flightId"));
+		int reservationId =random.nextInt(1000);
+		r_dao.addRservation(reservationId,member.getId(), flightid, seat);
+		
+		request.setAttribute("flightid",flightid );
+		
+		
+		response.sendRedirect("air.nhn?action=reservecomplete");
+	}
+	
+	
+	//예약 확인 화면 
+	
+	public void CheckReserve(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		Flight f = new Flight();
 		Reservation r = new Reservation();
-
-		return "main";
+		r=r_dao.UserReservation(member.getId());
+		f = f_dao.getFlightID(r.getFlightId());
+		request.setAttribute("flight",f );
+		request.setAttribute("reservatuin",r );
+		
+		response.sendRedirect("air.nhn?action=reserveCheck");
+		
 	}
+	
 
-	public void getReservationById(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
-		response.sendRedirect("air.nhn?action=join");
-	}
+	
 
-	public String getReservation(HttpServletRequest request) throws SQLException {
 
-		Reservation r = new Reservation();
-
-		request.setAttribute("reservation", r);
-		return "main";
-	}
 
 }

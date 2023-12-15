@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
-    
+    pageEncoding="UTF-8" %>  
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>항공 예약 사이트</title>
+    <title>seatChosse</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -40,7 +40,7 @@
             margin-right: 20px;
         }
         .navbar img {
-            width: 100px; /* 이미지 너비 조절 */
+            width: 100px; /* ì´ë¯¸ì§ ëë¹ ì¡°ì  */
         }
         .login-form {
             margin-top: 100px;
@@ -61,7 +61,7 @@
             color: #007bff;
         }
         .login-btn {
-            background-color: #4CAF50; /* 초록색 */
+            background-color: #4CAF50; /* ì´ë¡ì */
             color: white;
             border: none;
             border-radius: 5px;
@@ -98,17 +98,17 @@
         <h2>Airline Reservation</h2>
 
         <form method="post" action="air.nhn?action=reserve">
-            <button type="submit" id="reserve" name="항공 예약">항공 예약</button>
+            <button type="submit" id="reserve" name="í­ê³µ ìì½">í­ê³µ ìì½</button>
         </form>
-        <form method="post" action="air.nhn?action=reserveCheck">
-            <button type="submit" id="reserveCheck" name="항공 예약 확인">항공 예약 확인</button>
+        <form method="post" action="air.nhn?action=CheckReserve">
+            <button type="submit" id="reserveCheck" name="í­ê³µ ìì½ íì¸">í­ê³µ ìì½ íì¸</button>
         </form>
         <form method="post" action="air.nhn?action=login">
-            <button type="submit" id="login" name="로그인">로그인</button>
+            <button type="submit" id="login" name="ë¡ê·¸ì¸">ë¡ê·¸ì¸</button>
         </form>
     </div>
     <div class="login-form">
-        <h3 style="padding: 20px;">좌석을 선택해주세용</h3>
+        <h3 style="padding: 20px;">좌석을 선택해 주세요</h3>
         <input class="button_seat" type="button" name="test" value="A1" onclick="color('#ec5858')" /> 
         <input class="button_seat" type="button" name="test" value="A2" onclick="color('#ec5858')" /> 
         <input class="button_seat" type="button" name="test" value="A3" onclick="color('#ec5858')" /> 

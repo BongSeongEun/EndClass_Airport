@@ -21,6 +21,13 @@ public class ReservationDAO {
 	        return conn;
 	    }
 
+    public void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     /*
      * public void addReservation(Reservation reservation) {
      * String query = "INSERT INTO Reservations (userId, airplaneId, rseat) VALUES
@@ -72,8 +79,10 @@ public class ReservationDAO {
                 reservations.add(reservation);
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
 
         return null;
@@ -102,8 +111,10 @@ public class ReservationDAO {
                 return reservation;
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
 
         return null;
@@ -131,8 +142,10 @@ public class ReservationDAO {
                 return reservation;
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
 
         return null;

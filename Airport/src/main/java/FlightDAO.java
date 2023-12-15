@@ -21,11 +21,20 @@ public class FlightDAO {
 	        return conn;
 	    }
 
+    public void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     // 항공권ID - input: airplanId
     // -> {항공사, 출발지, 도착지, 시간, 가격} 보여줌
     public Flight getFlightID(int flightId) throws SQLException {
+
         Flight flight = new Flight();
-        String query = "SELECT (airline, departureairport, arrivalairport, time, price) FROM Flight WHERE flightId = ?";
+        String sql = "SELECT (airline, departureairport, arrivalairport, time, price) FROM Flight WHERE flightId = ?";
 
         Connection conn  = open();
         PreparedStatement preparedStatement = conn.prepareStatement(query);
@@ -40,8 +49,10 @@ public class FlightDAO {
                 flight.setTime(resultSet.getString("time"));
                 flight.setPrice(resultSet.getDouble("price"));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
 
         return flight;
@@ -69,8 +80,10 @@ public class FlightDAO {
                 CorrectFlightIds.add(FlightId);
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
 
         return CorrectFlightIds;
@@ -93,8 +106,10 @@ public class FlightDAO {
                 allseats.add(allseat);
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
 
         return allseats;
