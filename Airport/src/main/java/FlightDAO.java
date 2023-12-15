@@ -7,20 +7,19 @@ import java.util.List;
 import java.sql.DriverManager;
 
 public class FlightDAO {
-    private Connection connection = null;
-    PreparedStatement pstmt;
+	 final String JDBC_DRIVER = "org.h2.Driver";
+	 final String JDBC_URL = "jdbc:h2:tcp://localhost/~/jwbookdb";
 
-    final String JDBC_DRIVER = "org.h2.Driver";
-    final String JDBC_URL = "jdbc:h2:tcp//localhost/~/jwbookdb";
-
-    public void open() {
-        try {
-            Class.forName(JDBC_DRIVER);
-            connection = DriverManager.getConnection(JDBC_URL, "jwbook", "1234");
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-    }
+	  public Connection open() {
+	        Connection conn = null;
+	        try {
+	            Class.forName(JDBC_DRIVER);
+	            conn = DriverManager.getConnection(JDBC_URL,"jwbook","1234");
+	        } catch (Exception e) { e.printStackTrace(); }
+	        
+	        
+	        return conn;
+	    }
 
     public void close() {
         try {
@@ -32,13 +31,14 @@ public class FlightDAO {
 
     // 항공권ID - input: airplanId
     // -> {항공사, 출발지, 도착지, 시간, 가격} 보여줌
-    public Flight getFlightID(int flightId) {
-        open();
+    public Flight getFlightID(int flightId) throws SQLException {
+
         Flight flight = new Flight();
         String sql = "SELECT (airline, departureairport, arrivalairport, time, price) FROM Flight WHERE flightId = ?";
 
+        Connection conn  = open();
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, flightId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -62,13 +62,14 @@ public class FlightDAO {
 
     // 선택된 출발지/도착지로 된 항공권ID SELECT - input: 선택된 출발지, 선택된 도착지
     // {항공권ID} <- 출발지와 도착지가 같은 모든 항공권ID 테이블
-    public List<Integer> getCorrectFlightIds(String selectedSource, String selectedDestination) {
-        open();
+    public List<Integer> getCorrectFlightIds(String selectedSource, String selectedDestination) throws SQLException {
         List<Integer> CorrectFlightIds = new ArrayList<>();
         String query = "SELECT flightId FROM Flight WHERE departureairport = '?' AND arrivalairport = '?'";
 
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        
+        Connection conn  = open();
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        try  {
             preparedStatement.setString(1, selectedSource);
             preparedStatement.setString(2, selectedDestination);
 
@@ -90,13 +91,13 @@ public class FlightDAO {
 
     // 모든 시트 표시
     // 선택된 시트(1110)같은 숫자 모음 다 보여주는걸로 수정?
-    public List<Flight> getAlltseats() {
-        open();
+    public List<Flight> getAlltseats() throws SQLException {
         List<Flight> allseats = new ArrayList<>();
         String query = "SELECT seat FROM Flight";
-
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        Connection conn  = open();
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        
+        try{
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
