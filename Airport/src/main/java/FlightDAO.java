@@ -49,7 +49,7 @@ public class FlightDAO {
                 flight.setTime(resultSet.getString("time"));
                 flight.setPrice(resultSet.getDouble("price"));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             close();
@@ -79,7 +79,7 @@ public class FlightDAO {
                 CorrectFlightIds.add(FlightId);
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             close();
@@ -105,7 +105,7 @@ public class FlightDAO {
                 allseats.add(allseat);
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             close();
