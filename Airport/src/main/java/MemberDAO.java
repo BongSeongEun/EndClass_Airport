@@ -11,9 +11,9 @@ public class MemberDAO {
 
     public MemberDAO() {
         // 데이터베이스 연결 설정
-        String url = "jdbc:h2:~/test"; // H2 데이터베이스 URL
+        String url = "jdbc:h2:tcp://localhost/~/jwbookdb"; // H2 데이터베이스 URL
         String user = "jwbook";
-        String password = "1111";
+        String password = "1234";
 
         try {
             Class.forName("org.h2.Driver");
