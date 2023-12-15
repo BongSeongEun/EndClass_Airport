@@ -7,28 +7,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemberDAO {
-    private Connection connection;
+    private Connection connection = null;
+    PreparedStatement pstmt;
 
-    public MemberDAO() {
-        // 데이터베이스 연결 설정
-        String url = "jdbc:h2:tcp://localhost/~/jwbookdb"; // H2 데이터베이스 URL
-        String user = "jwbook";
-        String password = "1234";
+    final String JDBC_DRIVER = "org.h2.Driver";
+    final String JDBC_URL = "jdbc:h2:tcp//localhost/~/jwbookdb";
 
+    public void open() {
         try {
-            Class.forName("org.h2.Driver");
-            connection = DriverManager.getConnection(url, user, password);
+            Class.forName(JDBC_DRIVER);
+            connection = DriverManager.getConnection(JDBC_URL, "jwbook", "1234");
         } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     // User 객체 생성해서 사용자를 데이터베이스에 추가
     public void addMember(String Id, String password) {
+        open();
         List<Member> members = new ArrayList<>();
-        String query = "INSERT INTO Member (Id. password) VALUES (?,?)";
+        String sql = "INSERT INTO Member (Id. password) VALUES (?,?)";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, Id);
             preparedStatement.setString(2, password);
 
@@ -42,14 +51,18 @@ public class MemberDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
     }
 
     // 사용자 ID에 해당하는 사용자 정보를 데이터베이스에서 조회 있으면 User객체 반환 없으면 null 반환
     public Member getMemberById(String Id) {
+        open();
         String query = "SELECT * FROM Members WHERE Id = ?";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, Id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
