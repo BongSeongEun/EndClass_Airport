@@ -110,7 +110,7 @@
         </div>
         <div class="login-form">
         <h2>회원가입</h2>
-        <form action="join_ok.jsp" method="post">
+        <form action="air.nhn?action=join_succes" method="post">
             아이디:<input type="text" name="id"><br/>
             비밀번호:<input type="password" name="pw"><br/>
             <input type="submit" class="login-btn" value="가입">
