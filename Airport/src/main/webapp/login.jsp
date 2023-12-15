@@ -93,7 +93,7 @@
     <div class="login-form">
         <h2>로그인</h2>
         <br>
-        <form method="post" action="/Airport/login">
+        <form method="post" action="air.nhn?action=getUserById">
             <div class="form-group">
                 <label for="username">아이디:</label>
                 <input type="text" class="form-control" id="id" name="id" required = "">
