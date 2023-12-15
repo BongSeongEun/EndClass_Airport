@@ -49,7 +49,7 @@ public class MemberDAO {
 
             members.add(member);
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             close();
@@ -74,8 +74,10 @@ public class MemberDAO {
 
                 return member;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
 
         return null;
