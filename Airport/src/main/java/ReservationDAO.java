@@ -79,8 +79,10 @@ public class ReservationDAO {
                 reservations.add(reservation);
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
 
         return null;
@@ -107,8 +109,10 @@ public class ReservationDAO {
                 return reservation;
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
 
         return null;
@@ -137,8 +141,10 @@ public class ReservationDAO {
                 return reservation;
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
 
         return null;
