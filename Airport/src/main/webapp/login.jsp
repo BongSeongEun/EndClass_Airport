@@ -81,7 +81,7 @@
         <form method="post" action="air.nhn?action=reserve">
             <button type="submit" id="reserve" name="항공 예약">항공 예약</button>
         </form>
-        <form method="post" action="air.nhn?action=CheckReserve">
+        <form method="post" action="air.nhn?action=reserveCheck">
             <button type="submit" id="reserveCheck" name="항공 예약 확인">항공 예약 확인</button>
         </form>
         <form method="post" action="air.nhn?action=login">
@@ -93,7 +93,7 @@
     <div class="login-form">
         <h2>로그인</h2>
         <br>
-        <form method="post" action="/Airport/login">
+       <form method="post" action="air.nhn?action=getUser">
             <div class="form-group">
                 <label for="username">아이디:</label>
                 <input type="text" class="form-control" id="id" name="id" required = "">

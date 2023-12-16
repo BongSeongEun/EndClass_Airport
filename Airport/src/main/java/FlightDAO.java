@@ -7,29 +7,29 @@ import java.util.List;
 import java.sql.DriverManager;
 
 public class FlightDAO {
-    private Connection connection;
+	 final String JDBC_DRIVER = "org.h2.Driver";
+	 final String JDBC_URL = "jdbc:h2:tcp://localhost/~/jwbookdb";
 
-    public FlightDAO() {
-        // 데이터베이스 연결 설정
-        String url = "jdbc:h2:~/test"; // H2 데이터베이스 URL
-        String user = "jwbook";
-        String password = "1234";
-
-        try {
-            Class.forName("org.h2.Driver");
-            connection = DriverManager.getConnection(url, user, password);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-    }
+	  public Connection open() {
+	        Connection conn = null;
+	        try {
+	            Class.forName(JDBC_DRIVER);
+	            conn = DriverManager.getConnection(JDBC_URL,"jwbook","1234");
+	        } catch (Exception e) { e.printStackTrace(); }
+	        
+	        
+	        return conn;
+	    }
 
     // 항공권ID - input: airplanId
     // -> {항공사, 출발지, 도착지, 시간, 가격} 보여줌
-    public Flight getFlightID(int flightId) {
+    public Flight getFlightID(int flightId) throws SQLException {
         Flight flight = new Flight();
         String query = "SELECT (airline, departureairport, arrivalairport, time, price) FROM Flight WHERE flightId = ?";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        Connection conn  = open();
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        try {
             preparedStatement.setInt(1, flightId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -51,35 +51,43 @@ public class FlightDAO {
 
     // 선택된 출발지/도착지로 된 항공권ID SELECT - input: 선택된 출발지, 선택된 도착지
     // {항공권ID} <- 출발지와 도착지가 같은 모든 항공권ID 테이블
-    public List<Integer> getCorrectFlightIds(String selectedSource, String selectedDestination) {
-        List<Integer> CorrectFlightIds = new ArrayList<>();
-        String query = "SELECT flightId FROM Flight WHERE departureairport = '?' AND arrivalairport = '?'";
+    public List<Flight> getCorrectFlight(String departureairport, String arrivalairport) throws SQLException {
+        List<Flight> CorrectFlight = new ArrayList<>();
+        String query = "SELECT * FROM Flight WHERE departureairport = ? AND arrivalairport = ?";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, selectedSource);
-            preparedStatement.setString(2, selectedDestination);
+        Connection conn = open();
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        try {
+            preparedStatement.setString(1, departureairport);
+            preparedStatement.setString(2, arrivalairport);
 
+            Flight flight = new Flight();
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                int FlightId = resultSet.getInt("flightId");
-                CorrectFlightIds.add(FlightId);
+                flight.setAirline(resultSet.getString("airline"));
+                flight.setDepartureairport(resultSet.getString("departureairport"));
+                flight.setArrivalairport(resultSet.getString("arrivalairport"));
+                flight.setTime(resultSet.getString("time"));
+                flight.setPrice(resultSet.getDouble("price"));
+                CorrectFlight.add(flight);
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return CorrectFlightIds;
+        return CorrectFlight;
     }
-
     // 모든 시트 표시
     // 선택된 시트(1110)같은 숫자 모음 다 보여주는걸로 수정?
-    public List<Flight> getAlltseats() {
+    public List<Flight> getAlltseats() throws SQLException {
         List<Flight> allseats = new ArrayList<>();
         String query = "SELECT seat FROM Flight";
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        Connection conn  = open();
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        
+        try{
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {

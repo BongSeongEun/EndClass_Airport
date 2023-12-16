@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
+<%@ page import="java.util.List" %>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
@@ -93,9 +95,7 @@
     </div>
 
 <form method="post" action="air.nhn?action=selectSeat">
-    <p>출발지: ${flight.DepartureAirport}</p>
-    <p>목적지: ${flight.ArrivalAirport}</p>
-
+   
     <hr>
     <table border="1">
         <tr>
@@ -106,11 +106,11 @@
         </tr>
         <c:forEach items="${l_flight}" var="l">
             <tr>
-                <td>${l.Airline}</td>
-                <td>${l.Time}</td>
-                <td>${l.Price}</td>
+                <td>${l.airline}</td>
+                <td>${l.time}</td>
+                <td>${l.price}</td>
                 <td>
-                    <button type="submit" id = "btn" value = "${l.FlightID}" name="reserveButton"> 예약하기 </button>
+                    <button type="submit" id = "btn" value = "${l.flightId}" name="reserveButton"> 예약하기 </button>
                 </td>
             </tr>
         </c:forEach>

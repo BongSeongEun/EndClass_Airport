@@ -1,12 +1,12 @@
 public class Member {
-	private String Id;
+	private int Id;
 	private String password;
 
-	public String getId() {
+	public int getId() {
 		return Id;
 	}
 
-	public void setId(String Id) {
+	public void setId(int Id) {
 		this.Id = Id;
 	}
 

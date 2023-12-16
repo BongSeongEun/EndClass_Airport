@@ -7,56 +7,61 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemberDAO {
-    private Connection connection;
+  
+	 final String JDBC_DRIVER = "org.h2.Driver";
+	 final String JDBC_URL = "jdbc:h2:tcp://localhost/~/jwbookdb";
 
-    public MemberDAO() {
-        // 데이터베이스 연결 설정
-        String url = "jdbc:h2:tcp://localhost/~/jwbookdb"; // H2 데이터베이스 URL
-        String user = "jwbook";
-        String password = "1234";
-
-        try {
-            Class.forName("org.h2.Driver");
-            connection = DriverManager.getConnection(url, user, password);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
+	  public Connection open() throws SQLException {
+	        Connection conn = null;
+	        try {
+	            Class.forName(JDBC_DRIVER);
+	            
+	        } catch (Exception e) { e.printStackTrace(); }
+	        
+	        conn = DriverManager.getConnection(JDBC_URL,"jwbook","1234");
+	        return conn;
+	    }
     // User 객체 생성해서 사용자를 데이터베이스에 추가
-    public void addMember(String Id, String password) {
-        List<Member> members = new ArrayList<>();
-        String query = "INSERT INTO Member (Id. password) VALUES (?,?)";
+	  public void addMember(int Id, String password) throws SQLException {
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, Id);
-            preparedStatement.setString(2, password);
+	        List<Member> members = new ArrayList<>();
+	        String query = "INSERT INTO Member (Id, password) VALUES (?,?)";
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            Member member = new Member();
+	        Connection conn = open();
+	        PreparedStatement preparedStatement = conn.prepareStatement(query);
+	        try {
 
-            member.setId(resultSet.getString("Id"));
-            member.setPassword(resultSet.getString("password"));
+	            preparedStatement.setInt(1, Id);
+	            preparedStatement.setString(2, password);
+	            preparedStatement.executeUpdate();
+	           
+	            Member member = new Member();
 
-            members.add(member);
+	            member.setId(Id);
+	            member.setPassword(password);
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+	            members.add(member);
+	        } catch (SQLException e) {
+
+	            e.printStackTrace();
+	        }
+	    }
 
     // 사용자 ID에 해당하는 사용자 정보를 데이터베이스에서 조회 있으면 User객체 반환 없으면 null 반환
-    public Member getMemberById(String Id) {
-        String query = "SELECT * FROM Members WHERE Id = ?";
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, Id);
+    public Member getMemberById(int Id) throws SQLException {
+    	
+        String query = "SELECT * FROM Member WHERE Id = ?";
+       
+        Connection conn = open();
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        try{
+            preparedStatement.setInt(1, Id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
                 Member member = new Member();
-                member.setId(resultSet.getString("Id"));
+                member.setId(resultSet.getInt("Id"));
                 member.setPassword(resultSet.getString("password"));
 
                 return member;
