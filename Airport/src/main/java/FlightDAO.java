@@ -7,19 +7,20 @@ import java.util.List;
 import java.sql.DriverManager;
 
 public class FlightDAO {
-	 final String JDBC_DRIVER = "org.h2.Driver";
-	 final String JDBC_URL = "jdbc:h2:tcp://localhost/~/jwbookdb";
+    final String JDBC_DRIVER = "org.h2.Driver";
+    final String JDBC_URL = "jdbc:h2:tcp://localhost/~/jwbookdb";
 
-	  public Connection open() {
-	        Connection conn = null;
-	        try {
-	            Class.forName(JDBC_DRIVER);
-	            conn = DriverManager.getConnection(JDBC_URL,"jwbook","1234");
-	        } catch (Exception e) { e.printStackTrace(); }
-	        
-	        
-	        return conn;
-	    }
+    public Connection open() {
+        Connection conn = null;
+        try {
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(JDBC_URL, "jwbook", "1234");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return conn;
+    }
 
     public void close() {
         try {
@@ -36,7 +37,7 @@ public class FlightDAO {
         Flight flight = new Flight();
         String sql = "SELECT (airline, departureairport, arrivalairport, time, price) FROM Flight WHERE flightId = ?";
 
-        Connection conn  = open();
+        Connection conn = open();
         PreparedStatement preparedStatement = conn.prepareStatement(query);
         try {
             preparedStatement.setInt(1, flightId);
@@ -66,10 +67,9 @@ public class FlightDAO {
         List<Integer> CorrectFlightIds = new ArrayList<>();
         String query = "SELECT flightId FROM Flight WHERE departureairport = '?' AND arrivalairport = '?'";
 
-        
-        Connection conn  = open();
+        Connection conn = open();
         PreparedStatement preparedStatement = conn.prepareStatement(query);
-        try  {
+        try {
             preparedStatement.setString(1, selectedSource);
             preparedStatement.setString(2, selectedDestination);
 
@@ -94,10 +94,10 @@ public class FlightDAO {
     public List<Flight> getAlltseats() throws SQLException {
         List<Flight> allseats = new ArrayList<>();
         String query = "SELECT seat FROM Flight";
-        Connection conn  = open();
+        Connection conn = open();
         PreparedStatement preparedStatement = conn.prepareStatement(query);
-        
-        try{
+
+        try {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {

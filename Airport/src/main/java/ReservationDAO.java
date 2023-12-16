@@ -7,19 +7,20 @@ import java.util.List;
 import java.sql.DriverManager;
 
 public class ReservationDAO {
-	 final String JDBC_DRIVER = "org.h2.Driver";
-	 final String JDBC_URL = "jdbc:h2:tcp://localhost/~/jwbookdb";
+    final String JDBC_DRIVER = "org.h2.Driver";
+    final String JDBC_URL = "jdbc:h2:tcp://localhost/~/jwbookdb";
 
-	  public Connection open() {
-	        Connection conn = null;
-	        try {
-	            Class.forName(JDBC_DRIVER);
-	            conn = DriverManager.getConnection(JDBC_URL,"jwbook","1234");
-	        } catch (Exception e) { e.printStackTrace(); }
-	        
-	        
-	        return conn;
-	    }
+    public Connection open() {
+        Connection conn = null;
+        try {
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(JDBC_URL, "jwbook", "1234");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return conn;
+    }
 
     public void close() {
         try {
@@ -54,14 +55,14 @@ public class ReservationDAO {
 
     // 예약정보 생성 - input: 예약번호, 회원ID, 항공권ID, 선택된 좌석
     // -> {예약번호, 회원ID, 항공권ID, 선택된 좌석} 테이블 생성 후 INSERT
-    public List<Reservation> addRservation(int reservationId, String MemberId, int FlightId, int SeatSelection) throws SQLException {
+    public List<Reservation> addRservation(int reservationId, String MemberId, int FlightId, int SeatSelection)
+            throws SQLException {
         List<Reservation> reservations = new ArrayList<>();
         String query = "INSERT INTO Reservations (reservationId, MemberId, FlightId, SeatSelection) VALUES (?, ?, ?, ?)";
 
-        
-        Connection conn  = open();
-        PreparedStatement preparedStatement = conn.prepareStatement(query) ;
-        try  {
+        Connection conn = open();
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        try {
             preparedStatement.setInt(1, reservationId);
             preparedStatement.setString(2, MemberId);
             preparedStatement.setInt(3, FlightId);
@@ -93,12 +94,10 @@ public class ReservationDAO {
     public Reservation UserReservation(String MemberId) throws SQLException {
         // List<Reservation> userreservations = new ArrayList<>();
         String query = "SELECT reservationId, FlightId, SeatSelection FROM Reservations WHERE MemberId = ?";
-        
-        
-        
-        Connection conn  = open();
+
+        Connection conn = open();
         PreparedStatement preparedStatement = conn.prepareStatement(query);
-        try{
+        try {
             preparedStatement.setString(1, MemberId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -126,7 +125,7 @@ public class ReservationDAO {
     // 회의필요
     public Reservation getReservationById(int reservationId) throws SQLException {
         String query = "SELECT * FROM Reservations WHERE reservationId = ?";
-        Connection conn  = open();
+        Connection conn = open();
         PreparedStatement preparedStatement = conn.prepareStatement(query);
         try {
             preparedStatement.setInt(1, reservationId);
