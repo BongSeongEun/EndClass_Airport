@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import="java.util.List" %>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
@@ -94,8 +92,11 @@
         </form>
     </div>
 
-<form method="post" action="air.nhn?action=selectSeat">
-   
+<form method="post" action="air.nhn?action=toreserve3">
+    <c:if test="${not empty l_flight}">
+        <p>출발지: ${l_flight[0].departureairport}</p>
+        <p>목적지: ${l_flight[0].arrivalairport}</p>
+
     <hr>
     <table border="1">
         <tr>
@@ -115,6 +116,7 @@
             </tr>
         </c:forEach>
     </table>
+    </c:if>
 </form>
 
 </body>

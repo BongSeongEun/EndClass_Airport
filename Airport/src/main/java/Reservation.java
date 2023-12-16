@@ -1,42 +1,39 @@
 public class Reservation {
-	private int reservationId;
-	private String MemberId;
-	private int FlightId;
-	private int SeatSelection;
+   private int reservationId;
+   private int MemberId;
+   private int FlightId;
+   private String SeatSelection;
 
-	public int getReservationId() {
-		return reservationId;
-	}
+   public int getReservationId() {
+      return reservationId;
+   }
 
-	public void setReservationId(int reservationId) {
-		this.reservationId = reservationId;
-	}
+   public void setReservationId(int reservationId) {
+      this.reservationId = reservationId;
+   }
 
-	public String getUserId() {
-		return MemberId;
-	}
+   public int getUserId() {
+      return MemberId;
+   }
 
-	public void setMemberId(String MemberId) {
-		this.MemberId = MemberId;
-	}
+   public void setMemberId(int MemberId) {
+      this.MemberId = MemberId;
+   }
 
-	public int getFlightId() {
-		return FlightId;
-	}
+   public int getFlightId() {
+      return FlightId;
+   }
 
-	public void setFlightId(int FlightId) {
-		this.FlightId = FlightId;
-	}
+   public void setFlightId(int FlightId) {
+      this.FlightId = FlightId;
+   }
 
-	public int getSeatSelection() {
-		return SeatSelection;
-	}
+   public String getSeatSelection() {
+      return SeatSelection;
+   }
 
-	public void setSeatSelection(int SeatSelection) {
-		this.SeatSelection = SeatSelection;
-	}
-
-	
-
+   public void setSeatSelection(String SeatSelection) {
+      this.SeatSelection = SeatSelection;
+   }
 
 }

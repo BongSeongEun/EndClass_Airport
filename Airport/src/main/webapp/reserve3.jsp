@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,20 +106,23 @@
             <button type="submit" id="login" name="로그인">로그인</button>
         </form>
     </div>
-    <div class="login-form">
-        <h3 style="padding: 20px;">좌석을 선택해주세용</h3>
-        <input class="button_seat" type="button" name="test" value="A1" onclick="color('#ec5858')" /> 
-        <input class="button_seat" type="button" name="test" value="A2" onclick="color('#ec5858')" /> 
-        <input class="button_seat" type="button" name="test" value="A3" onclick="color('#ec5858')" /> 
-        <input class="button_seat" type="button" name="test" value="A4" onclick="color('#ec5858')" /> <br>
-        <input class="button_seat" type="button" name="test" value="B1" onclick="color('#ec5858')" /> 
-        <input class="button_seat" type="button" name="test" value="B2" onclick="color('#ec5858')" /> 
-        <input class="button_seat" type="button" name="test" value="B3" onclick="color('#ec5858')" /> 
-        <input class="button_seat" type="button" name="test" value="B4" onclick="color('#ec5858')" /> <br>
-        <input class="button_seat" type="button" name="test" value="C1" onclick="color('#ec5858')" /> 
-        <input class="button_seat" type="button" name="test" value="C2" onclick="color('#ec5858')" /> 
-        <input class="button_seat" type="button" name="test" value="C3" onclick="color('#ec5858')" /> 
-        <input class="button_seat" type="button" name="test" value="C4" onclick="color('#ec5858')" /> 
+     <div class="login-form">
+    <form method="post" action="air.nhn?action=reservecomplete">
+        <h3 style="padding: 20px;">좌석을 선택해 주세요</h3>
+        <input type="hidden" name="flightId" id="flightId" value="${flightid}">
+        <button class="button_seat" type="submit" id = "btn" value = "A1" name="seat"> A1 </button>
+        <button class="button_seat" type="submit" id = "btn" value = "A2" name="seat"> A2 </button>
+        <button class="button_seat" type="submit" id = "btn" value = "A3" name="seat"> A3 </button>
+        <button class="button_seat" type="submit" id = "btn" value = "A4" name="seat"> A4 </button>
+        <button class="button_seat" type="submit" id = "btn" value = "B1" name="seat"> B1 </button>
+        <button class="button_seat" type="submit" id = "btn" value = "B2" name="seat"> B2 </button>
+        <button class="button_seat" type="submit" id = "btn" value = "B3" name="seat"> B3 </button>
+        <button class="button_seat" type="submit" id = "btn" value = "B4" name="seat"> B4 </button>
+        <button class="button_seat" type="submit" id = "btn" value = "C1" name="seat"> C1 </button>
+        <button class="button_seat" type="submit" id = "btn" value = "C2" name="seat"> C2 </button>
+        <button class="button_seat" type="submit" id = "btn" value = "C3" name="seat"> C3 </button>
+        <button class="button_seat" type="submit" id = "btn" value = "C4" name="seat"> C4 </button>
+   </form>
     </div>
 
 
